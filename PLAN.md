@@ -40,6 +40,7 @@ music-theory-revised/
       engine.js       AudioContext, master chain (compressor, reverb), unlock on gesture
       instruments.js  "keys" (soft electric-piano-like) and "pad"
       player.js       playNote, playChord, arpeggiate, playSequence with step callbacks
+      scheduler.js    lookahead timing and synced event queue, no Web Audio (unit-tested)
     ui/
       piano.js        interactive keyboard component
       chord-card.js   chord display (name, numeral, notes, play button)
@@ -47,8 +48,11 @@ music-theory-revised/
     lessons/
       registry.js     list of lessons and their order
       01-keys-and-chords.js
+  dev/
+    audio.html        sandbox for trying the audio engine, not linked from the app
   tests/
     theory.test.js
+    audio.test.js
   docs/
     curriculum.md     lesson order, dependencies, status
     lessons/

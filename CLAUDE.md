@@ -4,6 +4,8 @@ Chord Lab is a personal web app for learning chords and chord progressions.
 The full plan, module specs and milestones are in PLAN.md. Read it before starting work.
 Lesson content is specified in docs/: docs/curriculum.md for the overview and
 docs/lessons/NN-name.md for each lesson. Implement lessons from their spec file.
+Only lessons with status "specified" are ready to implement; "outlined" lessons are
+not, but read them when making architecture decisions so later lessons stay possible.
 
 ## How to run
 - Tooling is managed with mise (`mise.toml` pins Node and serve). Run `mise install` once.
