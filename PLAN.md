@@ -52,7 +52,9 @@ music-theory-revised/
       settings.js     settings panel in the header
       section-layout.js  hear → see → read → try layout for a section
       play-button.js  Listen/Stop button bound to a player handle
-      key-selector.js key picker (radio group)
+      choice-group.js radio group styled as pills (mode toggle)
+      key-selector.js key picker built on the choice group
+      loop-builder.js four-chord loop slots with play and clear
       role-legend.js  legend for the piano highlight colors
       format.js       display names with ♯ and ♭
     lessons/
@@ -60,6 +62,8 @@ music-theory-revised/
       01-keys-and-chords/
         index.js      lesson definition and section order
         shared.js     voicing and playback helpers
+        chord-board.js  chord cards, piano and loop builder for a key (sections 3 and 5)
+        quiz-questions.js  quiz generator (pure, unit-tested)
         <section>.js  one file per section
   dev/
     audio.html        sandbox for trying the audio engine, not linked from the app
@@ -69,6 +73,7 @@ music-theory-revised/
     audio.test.js
     piano.test.js
     format.test.js
+    quiz-questions.test.js
     router.test.js
     storage.test.js
   docs/

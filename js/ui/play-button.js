@@ -37,5 +37,9 @@ export function createPlayButton({ label = 'Listen', play, primary = true }) {
     get playing() {
       return handle !== null;
     },
+    /** The handle of what is playing, or null. */
+    get handle() {
+      return handle;
+    },
   };
 }

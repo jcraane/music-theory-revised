@@ -466,7 +466,7 @@ input[type="range"] {
   font-size: var(--font-size-md);
 }
 
-.lesson-part__body > * + .key-selector,
+.lesson-part__body > * + .choice-group,
 .lesson-part__body > * + .button-row,
 .lesson-part__body > * + .loop-slots {
   margin-top: var(--space-2);
@@ -511,9 +511,9 @@ button.button:disabled {
   font-size: var(--font-size-sm);
 }
 
-/* Key selector */
+/* Choice group (key selector, mode toggle) */
 
-.key-selector {
+.choice-group {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
@@ -522,22 +522,22 @@ button.button:disabled {
   border: 0;
 }
 
-.key-selector legend {
+.choice-group legend {
   margin-bottom: var(--space-2);
   padding: 0;
 }
 
-.key-selector__option {
+.choice-group__option {
   position: relative;
 }
 
-.key-selector__input {
+.choice-group__input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-.key-selector__label {
+.choice-group__label {
   display: grid;
   place-items: center;
   min-width: 2.75rem;
@@ -549,13 +549,13 @@ button.button:disabled {
   cursor: pointer;
 }
 
-.key-selector__input:checked + .key-selector__label {
+.choice-group__input:checked + .choice-group__label {
   border-color: var(--color-accent);
   background: var(--color-accent);
   color: var(--color-accent-text);
 }
 
-.key-selector__input:focus-visible + .key-selector__label {
+.choice-group__input:focus-visible + .choice-group__label {
   box-shadow: var(--focus-ring);
 }
 
@@ -778,6 +778,102 @@ button.button:disabled {
   margin: 0;
   padding-left: var(--space-4);
   font-size: var(--font-size-sm);
+}
+
+/* Outside-the-key chords and swaps */
+
+.chord-row--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 32rem;
+}
+
+.chord-card[data-outside="true"] {
+  border-color: var(--role-outside);
+  border-style: solid;
+  box-shadow: inset 0 0 0 1px var(--role-outside);
+}
+
+.chord-card[data-outside="true"] .chord-card__quality {
+  color: var(--role-outside);
+  font-weight: 600;
+}
+
+/* The outside note is still named when the quality line is hidden on small screens. */
+@media (max-width: 36rem) {
+  .chord-card[data-outside="true"] .chord-card__quality {
+    display: block;
+    font-size: 0.75rem;
+  }
+}
+
+.swap + .swap {
+  margin-top: var(--space-3);
+}
+
+.swap__explanation {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--role-outside);
+}
+
+/* Quiz */
+
+.quiz {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 40rem;
+}
+
+.quiz__progress {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.quiz__prompt {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+.quiz__options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--space-2);
+}
+
+.quiz__option {
+  justify-content: center;
+  min-height: 3rem;
+}
+
+.quiz__option.button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.quiz__option.button.is-correct:disabled {
+  border-color: var(--quality-minor);
+  background: var(--quality-minor-bg);
+  opacity: 1;
+  font-weight: 600;
+}
+
+.quiz__option.is-correct::before {
+  content: "✓ ";
+}
+
+.quiz__option.button.is-wrong:disabled {
+  border-color: var(--role-root);
+  opacity: 1;
+  text-decoration: line-through;
+}
+
+.quiz__feedback p {
+  margin: 0 0 var(--space-2);
+}
+
+.quiz__verdict {
+  font-weight: 600;
 }
 
 @media (prefers-reduced-motion: reduce) {

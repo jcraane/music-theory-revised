@@ -1,6 +1,6 @@
 # 01: Keys, scales and the chords inside them
 
-**Status:** specified
+**Status:** built
 **Builds on:** –
 **Estimated sections:** 7
 
@@ -154,6 +154,15 @@ Decided while building sections 1–4:
 - Section 4: the raise/lower-the-third toggle is hidden for the diminished chord, since
   raising its third gives neither a major, minor nor diminished triad.
 - Starting a sound stops whatever else is playing, except notes played on the piano keys.
+
+Open, as built in sections 5–7 (to revisit together with sections 3 and 5):
+- Switching major/minor keeps a loop's degrees, so i–VI–III–VII (Am F C G) becomes
+  I–vi–iii–vii° (C Am Em Bdim). Alternative: keep the chords and only renumber them.
+- Section 5's Listen plays I–IV–V–I and i–VI–VII–i for the selected key pair, not only C/Am.
+- Ear and quality questions have three options (major, minor, diminished), not four.
+- Wrong options: neighboring chords (which chord); the other third plus neighbors (which
+  notes); the parallel minor plus ii and iii (relative minor).
+- The swapped chords in section 6 are numbered iv (Fm) and VI (A).
 
 ## Out of scope
 - Harmonic function and why some chords pull towards others (lesson 02).

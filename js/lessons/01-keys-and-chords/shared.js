@@ -15,13 +15,17 @@ export function voice(names, octave = 4) {
  * The tonic sits in octave 4 up to F#, and in octave 3 from G, so every chord stays
  * between C3 and B5.
  */
-export function voiceKeyChords(tonic, chords) {
-  const octave = pitchClass(tonic) <= 6 ? 4 : 3;
-  const roots = voice(spellScale(tonic, 'major'), octave);
+export function voiceKeyChords(tonic, mode, chords) {
+  const roots = voice(spellScale(tonic, mode), keyOctave(tonic));
   return chords.map((chord, i) => {
     const rootMidi = roots[i].midi;
     return chord.notes.map((name, j) => ({ name, midi: j === 0 ? rootMidi : rootMidi + semitonesBetween(chord.notes[0], name) }));
   });
+}
+
+/** Octave for a key's tonic: 4 up to F#, 3 from G, so chords stay between C3 and B5. */
+export function keyOctave(tonic) {
+  return pitchClass(tonic) <= 6 ? 4 : 3;
 }
 
 /** Stops whatever is playing, then plays the steps. */

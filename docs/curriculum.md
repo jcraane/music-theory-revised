@@ -12,7 +12,7 @@ titles and main experiment) → **specified** (full spec following the template)
 
 | # | Lesson | Goal | Builds on | Status |
 |---|--------|------|-----------|--------|
-| 01 | Keys, scales and the chords inside them | Build the seven chords of any major or minor key and hear why their qualities differ | – | specified |
+| 01 | Keys, scales and the chords inside them | Build the seven chords of any major or minor key and hear why their qualities differ | – | built |
 | 02 | Harmonic function: home, away, tension | Hear tonic, subdominant and dominant roles and predict how chords want to move | 01 | outlined |
 | 03 | Cadences: how phrases end | Recognize authentic, plagal, half and deceptive cadences by ear | 02 | outlined |
 | 04 | Root motion and the circle of fifths | See and hear why moves by 5ths feel strong, by 3rds soft, by steps like climbing | 01, 02 | outlined |
