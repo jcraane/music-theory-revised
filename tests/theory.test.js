@@ -1,7 +1,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { pitchClass, toMidi, intervalName, semitonesBetween } from '../js/theory/notes.js';
+import { pitchClass, toMidi, toMidiAscending, intervalName, semitonesBetween } from '../js/theory/notes.js';
 import { scaleSteps, spellScale, relativeMinor, relativeMajor } from '../js/theory/scales.js';
 import {
   triad,
@@ -77,6 +77,23 @@ describe('toMidi', () => {
   test('rejects invalid octaves', () => {
     assert.throws(() => toMidi('C', 4.5));
     assert.throws(() => toMidi('C', '4'));
+  });
+});
+
+describe('toMidiAscending', () => {
+  test('keeps every note above the previous one', () => {
+    assert.deepEqual(toMidiAscending(['C', 'E', 'G'], 4), [60, 64, 67]);
+    assert.deepEqual(toMidiAscending(['A', 'C', 'E'], 4), [69, 72, 76]);
+    assert.deepEqual(toMidiAscending(['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'], 4), [60, 62, 64, 65, 67, 69, 71, 72]);
+  });
+
+  test('moves up an octave for a repeated pitch', () => {
+    assert.deepEqual(toMidiAscending(['C', 'C'], 3), [48, 60]);
+  });
+
+  test('spelling across the octave boundary', () => {
+    assert.deepEqual(toMidiAscending(['B', 'D#', 'F#'], 3), [59, 63, 66]);
+    assert.deepEqual(toMidiAscending(['Cb', 'Eb', 'Gb'], 4), [59, 63, 66]);
   });
 });
 

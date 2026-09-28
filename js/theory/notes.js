@@ -50,6 +50,24 @@ export function toMidi(name, octave) {
   return (octave + 1) * 12 + NATURAL_PITCH[letter] + offset;
 }
 
+/**
+ * MIDI numbers for notes played bottom to top: the first note in `octave`, and each
+ * following note the nearest one above the previous (["A", "C", "E"], 4 → 69, 72, 76).
+ */
+export function toMidiAscending(names, octave) {
+  const midis = [];
+  for (const name of names) {
+    let midi = toMidi(name, octave);
+    const previous = midis.at(-1);
+    if (previous !== undefined) {
+      while (midi <= previous) midi += 12;
+      while (midi - 12 > previous) midi -= 12;
+    }
+    midis.push(midi);
+  }
+  return midis;
+}
+
 /** Plain name of an interval of 0–12 semitones (4 → "major 3rd"). */
 export function intervalName(semitones) {
   if (!Number.isInteger(semitones) || semitones < 0 || semitones > 12) {
