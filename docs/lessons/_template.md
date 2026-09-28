@@ -1,8 +1,12 @@
 # NN: Lesson title
 
-**Status:** idea | specified | built
+**Status:** idea | outlined | specified | built
 **Builds on:** lesson numbers
 **Estimated sections:** n
+
+An outlined lesson contains only: goal, key concepts, section titles with one line each,
+main experiment, quiz ideas, components and theory, and open questions. A specified
+lesson fills in every section below.
 
 ## Goal
 What you should be able to understand, hear or do after this lesson. One to three sentences.
