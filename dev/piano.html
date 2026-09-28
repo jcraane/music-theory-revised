@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Piano sandbox · Chord Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <style>
+    .sandbox { display: grid; gap: var(--space-6); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+    button, select {
+      font: inherit;
+      padding: var(--space-2) var(--space-4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      color: var(--color-text);
+      cursor: pointer;
+    }
+    .muted { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+  </style>
+  <script type="module" src="piano.js"></script>
+</head>
+<body>
+  <main class="sandbox">
+    <div>
+      <h1>Piano sandbox</h1>
+      <p class="muted">Developer page for trying the piano component. Not part of the app.</p>
+    </div>
+
+    <section class="row" aria-label="Controls">
+      <label>Key
+        <select id="tonic">
+          <option>C</option><option>G</option><option>D</option><option>E</option><option>F#</option>
+          <option>F</option><option>Bb</option><option>Eb</option><option>Ab</option><option>Gb</option>
+        </select>
+      </label>
+      <label>Labels
+        <select id="labels">
+          <option value="highlighted">Highlighted keys</option>
+          <option value="all">All keys</option>
+          <option value="none">None</option>
+        </select>
+      </label>
+      <label><input id="theme" type="checkbox"> Dark theme</label>
+    </section>
+
+    <section class="row" aria-label="Demos">
+      <button id="scale">Play scale</button>
+      <button id="triad">Build the I triad</button>
+      <button id="chords">Chords of the key</button>
+      <button id="fm">Fm in C major</button>
+      <button id="amaj">A major in C major</button>
+      <button id="semitones">Count C to E</button>
+      <button id="clear">Clear</button>
+    </section>
+
+    <div id="piano"></div>
+    <p class="muted" id="event" aria-live="polite">Click a key or use the arrow keys and Enter.</p>
+
+    <section>
+      <h2>Three octaves from C3, all labels</h2>
+      <div id="wide"></div>
+    </section>
+  </main>
+</body>
+</html>

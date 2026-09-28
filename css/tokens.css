@@ -11,6 +11,28 @@
   --color-accent-text: #ffffff;
   --color-focus: #3f5bd8;
 
+  /* Piano keys and highlight roles (fill and label color) */
+  --key-white: #ffffff;
+  --key-white-text: #5f5a54;
+  --key-black: #26231f;
+  --key-black-text: #e8e4de;
+  --key-border: #c9c4bb;
+  --role-root: #c93b2f;
+  --role-root-text: #ffffff;
+  --role-third: #e5a220;
+  --role-third-text: #1d1b19;
+  --role-fifth: #2a70bd;
+  --role-fifth-text: #ffffff;
+  --role-scale: #d7defc;
+  --role-scale-text: #23307a;
+  --role-scale-black: #4a5bb8;
+  --role-scale-black-text: #ffffff;
+  --role-outside: #9a3fc4;
+  --role-outside-text: #ffffff;
+  --role-skipped: #ece9e4;
+  --role-skipped-text: #b3ada5;
+  --role-skipped-black: #6b665f;
+
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
@@ -40,6 +62,27 @@
     --color-accent: #8da2ff;
     --color-accent-text: #11131c;
     --color-focus: #8da2ff;
+
+    --key-white: #d8d4cd;
+    --key-white-text: #3a3632;
+    --key-black: #0e0d0c;
+    --key-black-text: #b8b2a9;
+    --key-border: #0e0d0c;
+    --role-root: #ef6a5c;
+    --role-root-text: #1a0b09;
+    --role-third: #f0b845;
+    --role-third-text: #1d1b19;
+    --role-fifth: #5d9ff0;
+    --role-fifth-text: #0b1422;
+    --role-scale: #a9b7f5;
+    --role-scale-text: #11131c;
+    --role-scale-black: #5d6fd6;
+    --role-scale-black-text: #ffffff;
+    --role-outside: #c07ae6;
+    --role-outside-text: #1a0b22;
+    --role-skipped: #7a756e;
+    --role-skipped-text: #b8b2a9;
+    --role-skipped-black: #3a3632;
   }
 }
 
@@ -52,4 +95,25 @@
   --color-accent: #8da2ff;
   --color-accent-text: #11131c;
   --color-focus: #8da2ff;
+
+  --key-white: #d8d4cd;
+  --key-white-text: #3a3632;
+  --key-black: #0e0d0c;
+  --key-black-text: #b8b2a9;
+  --key-border: #0e0d0c;
+  --role-root: #ef6a5c;
+  --role-root-text: #1a0b09;
+  --role-third: #f0b845;
+  --role-third-text: #1d1b19;
+  --role-fifth: #5d9ff0;
+  --role-fifth-text: #0b1422;
+  --role-scale: #a9b7f5;
+  --role-scale-text: #11131c;
+  --role-scale-black: #5d6fd6;
+  --role-scale-black-text: #ffffff;
+  --role-outside: #c07ae6;
+  --role-outside-text: #1a0b22;
+  --role-skipped: #7a756e;
+  --role-skipped-text: #b8b2a9;
+  --role-skipped-black: #3a3632;
 }

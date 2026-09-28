@@ -60,6 +60,123 @@ main:focus {
   outline: none;
 }
 
+/* Piano */
+
+.piano {
+  container-type: inline-size;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.piano__keys {
+  position: relative;
+  width: 100%;
+}
+
+.piano__key {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0;
+  padding: 0 0 0.5rem;
+  border: 1px solid var(--key-border);
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 200ms, color 200ms, box-shadow 100ms, transform 60ms;
+}
+
+.piano__key--white,
+.piano__key--white:focus-visible {
+  height: 100%;
+  background: var(--key-white);
+  color: var(--key-white-text);
+  border-radius: 0 0 6px 6px;
+}
+
+.piano__key--black,
+.piano__key--black:focus-visible {
+  z-index: 1;
+  height: 62%;
+  padding-bottom: 0.35rem;
+  background: var(--key-black);
+  color: var(--key-black-text);
+  border-radius: 0 0 4px 4px;
+}
+
+.piano__key:focus-visible {
+  z-index: 2;
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.piano__label {
+  font-size: clamp(0.55rem, 1.7cqi, 0.85rem);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.piano__key[data-role="root"] { background: var(--role-root); color: var(--role-root-text); }
+.piano__key[data-role="third"] { background: var(--role-third); color: var(--role-third-text); }
+.piano__key[data-role="fifth"] { background: var(--role-fifth); color: var(--role-fifth-text); }
+.piano__key[data-role="scale"] { background: var(--role-scale); color: var(--role-scale-text); }
+.piano__key[data-role="outside-key"] { background: var(--role-outside); color: var(--role-outside-text); }
+.piano__key[data-role="skipped"] { background: var(--role-skipped); color: var(--role-skipped-text); }
+.piano__key--black[data-role="scale"] { background: var(--role-scale-black); color: var(--role-scale-black-text); }
+.piano__key--black[data-role="skipped"] { background: var(--role-skipped-black); color: var(--role-skipped-text); }
+
+.piano__key.is-active {
+  box-shadow: inset 0 0 0 4px var(--color-accent);
+}
+
+.piano__key.is-pressed {
+  transform: translateY(1px);
+  filter: brightness(0.92);
+}
+
+.piano__lane {
+  position: relative;
+  height: 1.5rem;
+}
+
+.piano__lane--below:empty {
+  height: 0;
+}
+
+.piano__annotation {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.piano__lane--above .piano__annotation { align-items: flex-start; }
+.piano__lane--below .piano__annotation { align-items: flex-end; }
+
+/* The bracket: a line with short ends pointing at the two keys. */
+.piano__annotation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0.4rem;
+  border: 1.5px solid currentColor;
+}
+
+.piano__lane--above .piano__annotation::after { bottom: 0.15rem; border-bottom: none; }
+.piano__lane--below .piano__annotation::after { top: 0.15rem; border-top: none; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

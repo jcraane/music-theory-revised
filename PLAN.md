@@ -50,9 +50,11 @@ music-theory-revised/
       01-keys-and-chords.js
   dev/
     audio.html        sandbox for trying the audio engine, not linked from the app
+    piano.html        sandbox for trying the piano component
   tests/
     theory.test.js
     audio.test.js
+    piano.test.js
   docs/
     curriculum.md     lesson order, dependencies, status
     lessons/
@@ -103,7 +105,11 @@ Tests must cover at least:
 
 ### Piano component (js/ui/piano.js)
 - Renders two octaves (configurable), responsive, SVG or DOM.
-- `highlight(notes, role)` with roles: root, third, fifth, scale, outside-key.
+- `highlight(notes, role)` with roles: root, third, fifth, scale, outside-key, skipped
+  (skipped is for lesson 01 section 2). Notes are MIDI numbers or `{ midi, name }`, so
+  voicings land on the right keys and labels use the key's spelling.
+- `annotate(fromMidi, toMidi, text)` draws a labeled bracket above or below the keys
+  (W/H steps, interval names, semitone counts); `setActive(notes)` marks sounding keys.
 - Clicking a key plays it and emits an event.
 - Optional note labels; supports animated step-by-step highlighting for scale and triad demos.
 - Respects prefers-reduced-motion.
