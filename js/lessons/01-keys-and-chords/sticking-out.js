@@ -68,14 +68,15 @@ export default {
 
     const steps = () => chords().map((chord, slot) => ({ notes: midis(voice(chord.notes)), beats: 2, chord, slot }));
 
-    function show({ chord, slot }) {
+    // `sounding` marks the keys as playing; off when only showing a chord after a swap.
+    function show({ chord, slot }, { sounding = true } = {}) {
       const notes = voice(chord.notes);
       const outside = new Set(notesOutsideKey(chord.notes, C_MAJOR_SCALE));
       cards.forEach((card, i) => card.setActive(i === slot));
       piano.clear();
       piano.highlight(notes, 'scale');
       piano.highlight(notes.filter((n) => outside.has(n.name)), 'outside-key');
-      piano.setActive(notes);
+      piano.setActive(sounding ? notes : []);
     }
 
     function clearActive() {
@@ -120,7 +121,7 @@ export default {
           renderCards();
           // A playing loop picks up the change from its next chord.
           if (handle) handle.setSteps(steps());
-          else show({ chord: swap.chord, slot: swap.slot });
+          else show({ chord: on ? swap.chord : chords()[swap.slot], slot: swap.slot }, { sounding: false });
         },
       }, swap.label);
       return h('div', { class: 'swap' }, button, explanation);
@@ -132,7 +133,6 @@ export default {
     );
 
     renderCards();
-    show({ chord: C_MAJOR[0], slot: -1 });
-    piano.setActive([]);
+    show({ chord: C_MAJOR[0], slot: -1 }, { sounding: false });
   },
 };

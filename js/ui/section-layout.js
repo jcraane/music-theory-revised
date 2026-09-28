@@ -12,7 +12,7 @@ export function sectionLayout(container, { listen, caption, read }) {
 
   container.append(
     h('div', { class: 'lesson-part lesson-part--hear' },
-      createPlayButton({ play: listen }).element,
+      createPlayButton({ play: listen, shortcut: true }).element,
       captionEl),
     see,
     h('div', { class: 'lesson-part lesson-part--read' }, read.map((text) => h('p', {}, text))),

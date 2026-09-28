@@ -2,6 +2,7 @@
    prefers-color-scheme, and data-theme="light|dark" on <html> overrides both. */
 
 :root {
+  color-scheme: light dark;
   --color-bg: #fbfaf7;
   --color-surface: #ffffff;
   --color-text: #1d1b19;
@@ -30,8 +31,9 @@
   --role-outside: #9a3fc4;
   --role-outside-text: #ffffff;
   --role-skipped: #ece9e4;
-  --role-skipped-text: #b3ada5;
+  --role-skipped-text: #847e76;
   --role-skipped-black: #6b665f;
+  --role-skipped-black-text: #e3dfd9;
 
   /* Chord quality treatments on cards */
   --quality-major: #c7861a;
@@ -57,7 +59,6 @@
 
   --radius: 0.5rem;
   --content-width: 60rem;
-  --focus-ring: 0 0 0 3px var(--color-focus);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,13 +85,14 @@
     --role-fifth-text: #0b1422;
     --role-scale: #a9b7f5;
     --role-scale-text: #11131c;
-    --role-scale-black: #5d6fd6;
+    --role-scale-black: #5264c8;
     --role-scale-black-text: #ffffff;
     --role-outside: #c07ae6;
     --role-outside-text: #1a0b22;
     --role-skipped: #7a756e;
-    --role-skipped-text: #b8b2a9;
+    --role-skipped-text: #26231f;
     --role-skipped-black: #3a3632;
+    --role-skipped-black-text: #b8b2a9;
     --quality-major: #f0b845;
     --quality-major-bg: #2e2515;
     --quality-minor: #8da9f0;
@@ -101,6 +103,7 @@
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --color-bg: #161513;
   --color-surface: #211f1c;
   --color-text: #eeebe6;
@@ -123,17 +126,22 @@
   --role-fifth-text: #0b1422;
   --role-scale: #a9b7f5;
   --role-scale-text: #11131c;
-  --role-scale-black: #5d6fd6;
+  --role-scale-black: #5264c8;
   --role-scale-black-text: #ffffff;
   --role-outside: #c07ae6;
   --role-outside-text: #1a0b22;
   --role-skipped: #7a756e;
-  --role-skipped-text: #b8b2a9;
+  --role-skipped-text: #26231f;
   --role-skipped-black: #3a3632;
+  --role-skipped-black-text: #b8b2a9;
   --quality-major: #f0b845;
   --quality-major-bg: #2e2515;
   --quality-minor: #8da9f0;
   --quality-minor-bg: #1b2336;
   --quality-dim: #d58cc6;
   --quality-dim-bg: #2e1b2a;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }

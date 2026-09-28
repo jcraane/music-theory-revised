@@ -3,10 +3,16 @@
 
 import { h } from './dom.js';
 
-export function createPlayButton({ label = 'Listen', play, primary = true }) {
+export function createPlayButton({ label = 'Listen', play, primary = true, shortcut = false }) {
   let handle = null;
 
-  const button = h('button', { type: 'button', class: `button play-button${primary ? ' button--primary' : ''}` });
+  // `shortcut` makes this the button Space presses (see shortcuts.js).
+  const button = h('button', {
+    type: 'button',
+    class: `button play-button${primary ? ' button--primary' : ''}`,
+    'data-shortcut': shortcut ? 'play' : null,
+    'aria-keyshortcuts': shortcut ? 'Space' : null,
+  });
 
   const show = (playing) => {
     button.replaceChildren(h('span', { class: 'play-button__icon', 'aria-hidden': 'true' }, playing ? '■' : '▶'), playing ? 'Stop' : label);

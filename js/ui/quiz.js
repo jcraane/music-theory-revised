@@ -66,7 +66,7 @@ export function renderQuiz(container, { createQuestions, playSound, onFinish }) 
       h('p', { class: 'quiz__progress' }, `Question ${index + 1} of ${questions.length}`),
       heading,
       question.kind === 'ear'
-        ? h('div', { class: 'button-row' }, createPlayButton({ label: 'Play the chord', play: () => playSound(question.sound) }).element)
+        ? h('div', { class: 'button-row' }, createPlayButton({ label: 'Play the chord', shortcut: true, play: () => playSound(question.sound) }).element)
         : null,
       h('div', { class: 'quiz__options', role: 'group', 'aria-label': 'Answers' }, buttons),
       feedback,

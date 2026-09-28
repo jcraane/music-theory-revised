@@ -32,6 +32,7 @@ music-theory-revised/
   js/
     main.js           app shell: routing, settings, view cleanup
     router.js         hash route parsing and section navigation helpers
+    shortcuts.js      Space = play/stop, Esc = stop
     storage.js        load/save settings and progress
     theory/
       notes.js        pitch classes, spelling, MIDI conversion
@@ -75,6 +76,7 @@ music-theory-revised/
     format.test.js
     quiz-questions.test.js
     router.test.js
+    shortcuts.test.js
     storage.test.js
   docs/
     curriculum.md     lesson order, dependencies, status
@@ -174,7 +176,8 @@ The MVP implements `docs/lessons/01-keys-and-chords.md`.
 - **M5 Lesson 1** sections 1–4, as specified in docs/lessons/01-keys-and-chords.md.
 - **M6 Lesson 1** sections 5–7, including the quiz.
 - **M7 Polish:** keyboard shortcuts (space = play/stop), focus states, reduced motion,
-  light/dark theme, mobile layout check.
+  light/dark theme, mobile layout check. Space keeps its normal job on buttons, piano keys
+  and form fields; Esc stops all sound from anywhere.
 
 Each milestone ends with a working app and a short manual test checklist.
 

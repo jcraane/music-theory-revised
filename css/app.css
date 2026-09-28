@@ -15,10 +15,10 @@ body {
   line-height: var(--line-height);
 }
 
+/* An outline, so it never competes with box-shadow states (active, pressed, playing). */
 :focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-  border-radius: var(--radius);
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 a {
@@ -63,7 +63,6 @@ main {
 main:focus,
 [tabindex="-1"]:focus {
   outline: none;
-  box-shadow: none;
 }
 
 h1 {
@@ -140,6 +139,10 @@ input[type="range"] {
   border-radius: var(--radius);
   background: var(--color-surface);
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+}
+
+.settings__keys {
+  margin: 0;
 }
 
 /* Lesson list */
@@ -256,10 +259,6 @@ input[type="range"] {
   text-decoration: none;
 }
 
-.section-steps__link:focus-visible {
-  border-radius: 50%;
-}
-
 .section-steps__link.is-done {
   border-color: var(--color-accent);
   color: var(--color-accent);
@@ -349,9 +348,6 @@ input[type="range"] {
 
 .piano__key:focus-visible {
   z-index: 2;
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
-  box-shadow: none;
 }
 
 .piano__label {
@@ -369,10 +365,15 @@ input[type="range"] {
 .piano__key[data-role="outside-key"] { background: var(--role-outside); color: var(--role-outside-text); }
 .piano__key[data-role="skipped"] { background: var(--role-skipped); color: var(--role-skipped-text); }
 .piano__key--black[data-role="scale"] { background: var(--role-scale-black); color: var(--role-scale-black-text); }
-.piano__key--black[data-role="skipped"] { background: var(--role-skipped-black); color: var(--role-skipped-text); }
+.piano__key--black[data-role="skipped"] { background: var(--role-skipped-black); color: var(--role-skipped-black-text); }
 
 .piano__key.is-active {
   box-shadow: inset 0 0 0 4px var(--color-accent);
+}
+
+/* Black keys are narrow: a thinner ring keeps their role color visible. */
+.piano__key--black.is-active {
+  box-shadow: inset 0 0 0 2px var(--color-accent);
 }
 
 .piano__key.is-pressed {
@@ -484,6 +485,7 @@ button.button:disabled {
 
 .button[aria-pressed="true"] {
   border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 14%, var(--color-surface));
   box-shadow: inset 0 0 0 1px var(--color-accent);
 }
 
@@ -556,7 +558,8 @@ button.button:disabled {
 }
 
 .choice-group__input:focus-visible + .choice-group__label {
-  box-shadow: var(--focus-ring);
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 /* Role legend */

@@ -33,6 +33,7 @@ export function renderSettings(container, store) {
       h('label', { class: 'field' }, h('span', { class: 'field__label' }, 'Volume'), volume),
       select('theme', 'Theme'),
       select('noteNames', 'Note names'),
+      h('p', { class: 'hint settings__keys' }, 'Space plays or stops the example. Esc stops all sound.'),
     ),
   );
 
