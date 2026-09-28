@@ -19,4 +19,4 @@ Then open the printed URL. ES modules need a local server; opening index.html di
 mise run test
 ```
 
-See PLAN.md for the plan and roadmap.
+See docs/PLAN.md for the plan and roadmap.
