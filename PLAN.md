@@ -30,7 +30,8 @@ music-theory-revised/
     tokens.css        colors, type scale, spacing
     app.css           layout and components
   js/
-    main.js           app shell, hash router, lesson navigation
+    main.js           app shell: routing, settings, view cleanup
+    router.js         hash route parsing and section navigation helpers
     storage.js        load/save settings and progress
     theory/
       notes.js        pitch classes, spelling, MIDI conversion
@@ -45,6 +46,10 @@ music-theory-revised/
       piano.js        interactive keyboard component
       chord-card.js   chord display (name, numeral, notes, play button)
       quiz.js         reusable quiz component
+      dom.js          h() helper for building DOM without innerHTML
+      lesson-list.js  lesson list with progress
+      lesson-view.js  section page, prev/next, and the ctx given to sections
+      settings.js     settings panel in the header
     lessons/
       registry.js     list of lessons and their order
       01-keys-and-chords.js
@@ -55,6 +60,8 @@ music-theory-revised/
     theory.test.js
     audio.test.js
     piano.test.js
+    router.test.js
+    storage.test.js
   docs/
     curriculum.md     lesson order, dependencies, status
     lessons/
@@ -119,10 +126,14 @@ A lesson is a module exporting:
 ```js
 { id, title, summary, sections: [ { id, title, render(container, ctx) } ] }
 ```
-where `ctx` gives access to audio, theory, piano and storage.
+where `ctx` gives access to audio, theory, piano and storage:
+`{ lesson, section, audio, theory, storage, settings, signal, complete(), createPiano() }`.
+Leaving a section stops audio, removes pianos made with `ctx.createPiano`, and aborts
+`ctx.signal`, so listeners added with `{ signal: ctx.signal }` are removed.
 
 - Hash routing: `#/` (lesson list), `#/lesson/<id>`, `#/lesson/<id>/<section>`.
-- Previous/next navigation between sections; progress stored per section.
+- Previous/next navigation between sections; progress stored per section. A section counts
+  as done when the user moves on with Next (or Finish); a section can also call `ctx.complete()`.
 - Each section follows the pattern: hear → see → read → try.
 - Lesson list shows completion state from storage.
 
