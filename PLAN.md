@@ -50,9 +50,17 @@ music-theory-revised/
       lesson-list.js  lesson list with progress
       lesson-view.js  section page, prev/next, and the ctx given to sections
       settings.js     settings panel in the header
+      section-layout.js  hear → see → read → try layout for a section
+      play-button.js  Listen/Stop button bound to a player handle
+      key-selector.js key picker (radio group)
+      role-legend.js  legend for the piano highlight colors
+      format.js       display names with ♯ and ♭
     lessons/
       registry.js     list of lessons and their order
-      01-keys-and-chords.js
+      01-keys-and-chords/
+        index.js      lesson definition and section order
+        shared.js     voicing and playback helpers
+        <section>.js  one file per section
   dev/
     audio.html        sandbox for trying the audio engine, not linked from the app
     piano.html        sandbox for trying the piano component
@@ -60,6 +68,7 @@ music-theory-revised/
     theory.test.js
     audio.test.js
     piano.test.js
+    format.test.js
     router.test.js
     storage.test.js
   docs/

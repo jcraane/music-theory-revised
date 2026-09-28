@@ -3,6 +3,7 @@
 
 import { parseNote, pitchClass } from '../theory/notes.js';
 import { playNote } from '../audio/player.js';
+import { prettyName } from './format.js';
 
 export const ROLES = ['root', 'third', 'fifth', 'scale', 'outside-key', 'skipped'];
 
@@ -170,7 +171,7 @@ export function createPiano(container, { from = 60, octaves = 2, labels = 'highl
   function render(key) {
     const name = key.name ?? defaultNoteName(key.midi);
     const showLabel = labels === 'all' ? key.name !== null || !key.black : labels === 'highlighted' && key.role !== null;
-    key.text.textContent = showLabel ? name : '';
+    key.text.textContent = showLabel ? prettyName(name) : '';
 
     if (key.role) key.button.dataset.role = key.role;
     else delete key.button.dataset.role;

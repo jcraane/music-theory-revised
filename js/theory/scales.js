@@ -37,6 +37,22 @@ export function relativeMajor(tonic) {
   return spellScale(tonic, 'minor')[2];
 }
 
+/**
+ * One tonic per pitch class, in pitch order, spelled so its scale has the fewest sharps
+ * and flats. A tie (F# or Gb major, D# or Eb minor) goes to the sharp spelling.
+ */
+export function commonTonics(mode) {
+  const accidentals = (tonic) => spellScale(tonic, mode).reduce((sum, n) => sum + Math.abs(parseNote(n).offset), 0);
+  const candidates = LETTERS.flatMap((letter) => [-1, 0, 1].map((offset) => noteName(letter, offset)));
+
+  return Array.from({ length: 12 }, (_, pc) =>
+    candidates
+      .filter((name) => pitchClass(name) === pc)
+      .map((name) => ({ name, count: accidentals(name), flat: parseNote(name).offset < 0 }))
+      .sort((a, b) => a.count - b.count || a.flat - b.flat)[0].name,
+  );
+}
+
 // Offset that turns a natural letter into the target pitch class, in the range -6..+5.
 function accidentalFor(letter, targetPitch) {
   const offset = mod12(targetPitch - pitchClass(letter));

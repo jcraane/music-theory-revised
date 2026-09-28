@@ -1,5 +1,10 @@
 // Lesson 01, specified in docs/lessons/01-keys-and-chords.md.
-// Section content arrives in M5 (sections 1–4) and M6 (sections 5–7).
+// Sections 5–7 arrive in M6.
+
+import majorScale from './major-scale.js';
+import buildingATriad from './building-a-triad.js';
+import sevenChords from './seven-chords.js';
+import whyQualitiesDiffer from './why-qualities-differ.js';
 
 const placeholder = (container) => {
   const p = document.createElement('p');
@@ -12,10 +17,10 @@ export default {
   title: 'Keys, scales and the chords inside them',
   summary: 'Build the seven chords of any major or minor key and hear why their qualities differ.',
   sections: [
-    { id: 'major-scale', title: 'The major scale', render: placeholder },
-    { id: 'building-a-triad', title: 'Building a triad', render: placeholder },
-    { id: 'seven-chords', title: 'The seven chords of a key', render: placeholder },
-    { id: 'why-qualities-differ', title: 'Why the qualities differ', render: placeholder },
+    majorScale,
+    buildingATriad,
+    sevenChords,
+    whyQualitiesDiffer,
     { id: 'minor-keys', title: 'Minor keys', render: placeholder },
     { id: 'sticking-out', title: 'Experiment: sticking out', render: placeholder },
     { id: 'check-yourself', title: 'Check yourself', render: placeholder },

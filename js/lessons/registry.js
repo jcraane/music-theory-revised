@@ -1,6 +1,6 @@
 // The lessons in the app, in order.
 
-import keysAndChords from './01-keys-and-chords.js';
+import keysAndChords from './01-keys-and-chords/index.js';
 
 export const lessons = [keysAndChords];
 

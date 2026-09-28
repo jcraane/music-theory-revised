@@ -2,7 +2,7 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { pitchClass, toMidi, toMidiAscending, intervalName, semitonesBetween } from '../js/theory/notes.js';
-import { scaleSteps, spellScale, relativeMinor, relativeMajor } from '../js/theory/scales.js';
+import { scaleSteps, spellScale, relativeMinor, relativeMajor, commonTonics } from '../js/theory/scales.js';
 import {
   triad,
   chordQuality,
@@ -192,6 +192,24 @@ describe('spellScale', () => {
   test('rejects invalid input', () => {
     assert.throws(() => spellScale('H', 'major'));
     assert.throws(() => spellScale('C', 'lydian'));
+  });
+});
+
+describe('commonTonics', () => {
+  test('major keys with the fewest accidentals, F# over Gb', () => {
+    assert.deepEqual(commonTonics('major'), ['C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B']);
+  });
+
+  test('minor keys match the relative minors of the major list', () => {
+    assert.deepEqual(commonTonics('minor'), ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']);
+    const relatives = commonTonics('major').map(relativeMinor).sort();
+    assert.deepEqual(relatives, [...commonTonics('minor')].sort());
+  });
+
+  test('one tonic per pitch class, in pitch order', () => {
+    for (const mode of ['major', 'minor']) {
+      assert.deepEqual(commonTonics(mode).map(pitchClass), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    }
   });
 });
 

@@ -1,5 +1,6 @@
 // Playing notes, chords, arpeggios and sequences. Every call returns a handle with stop(),
-// which fades out instead of cutting off.
+// which fades out instead of cutting off, and `finished`, a promise that resolves once the
+// sound has ended or was stopped.
 
 import { init, createBus, fadeOutBus, outputLatency } from './engine.js';
 import { instruments, DEFAULT_INSTRUMENT } from './instruments.js';
@@ -44,16 +45,20 @@ export function arpeggiate(midis, { interval = 0.25, when = 0, duration = 1, ins
   });
 
   let timer;
+  const { promise: finished, resolve: done } = Promise.withResolvers();
   const handle = {
     stop() {
       if (!active.delete(handle)) return;
       clearTimeout(timer);
       fadeOutBus(bus);
+      done();
     },
+    finished,
   };
   timer = setTimeout(() => {
     active.delete(handle);
     bus.disconnect();
+    done();
   }, (end - ctx.currentTime + 0.1) * 1000);
   active.add(handle);
   return handle;
@@ -63,14 +68,15 @@ export function arpeggiate(midis, { interval = 0.25, when = 0, duration = 1, ins
  * Plays steps of { notes: [midi], beats = 1 } at a tempo. A step with no notes is a rest,
  * and any other fields on a step are passed back to onStep untouched.
  * onStep(step, index) fires when the step is heard, onEnd() when a non-looping sequence
- * has finished. Returns { stop(), setSteps(steps) }; setSteps swaps the steps while
- * playing, from the next step on.
+ * has finished. Returns { stop(), setSteps(steps), finished }; setSteps swaps the steps
+ * while playing, from the next step on.
  */
 export function playSequence(steps, { bpm = 100, loop = false, onStep, onEnd, instrument, velocity = 0.8 } = {}) {
   const ctx = init();
   const bus = createBus();
   const play = instrumentFor(instrument ?? defaultInstrument);
   const queue = createEventQueue();
+  const { promise: finished, resolve: done } = Promise.withResolvers();
   let timer;
   let frame;
 
@@ -111,6 +117,7 @@ export function playSequence(steps, { bpm = 100, loop = false, onStep, onEnd, in
     active.delete(handle);
     stopTimers();
     setTimeout(() => bus.disconnect(), TAIL * 1000);
+    done();
   };
 
   const handle = {
@@ -118,10 +125,12 @@ export function playSequence(steps, { bpm = 100, loop = false, onStep, onEnd, in
       if (!active.delete(handle)) return;
       stopTimers();
       fadeOutBus(bus);
+      done();
     },
     setSteps(newSteps) {
       scheduler.setSteps(newSteps);
     },
+    finished,
   };
 
   active.add(handle);

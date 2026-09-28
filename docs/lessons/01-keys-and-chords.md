@@ -141,6 +141,20 @@ Eight questions per attempt, generated from the theory engine so each attempt di
 - **Chord construction for experiments:** a function to build a triad of a given quality
   on any root, independent of the key, plus a check that flags notes outside the key.
 
+## Implementation decisions
+Decided while building sections 1–4:
+- Nothing plays on arrival: each section starts with a Listen button. The visual shows its
+  finished state before listening (the full scale with W/H, the finished C triad).
+- The key selector offers the 12 major keys spelled with the fewest accidentals:
+  C, Db, D, Eb, E, F, F#, G, Ab, A, Bb, B. Relative minors follow from these.
+- Only sections 1 and 3 have a key selector; sections 2 and 4 stay in C major.
+- Section 3: the chords are voiced with roots rising from the tonic, on a three-octave
+  piano. The loop starts playing as soon as its fourth chord is picked, and picking a card
+  after that starts a new loop. (Autostart is provisional; revisit after using it.)
+- Section 4: the raise/lower-the-third toggle is hidden for the diminished chord, since
+  raising its third gives neither a major, minor nor diminished triad.
+- Starting a sound stops whatever else is playing, except notes played on the piano keys.
+
 ## Out of scope
 - Harmonic function and why some chords pull towards others (lesson 02).
 - Harmonic and melodic minor, and the major V in minor (lesson 07).
