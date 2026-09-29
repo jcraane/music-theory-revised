@@ -170,6 +170,7 @@ Lesson content is specified separately from this plan:
   interactions, experiments and quiz.
 
 The MVP implements `docs/lessons/01-keys-and-chords.md`.
+After the MVP, `docs/lessons/02-harmonic-function.md` follows (milestones M8–M10).
 
 ## Milestones
 - **M0 Setup:** folder structure, index.html, mise.toml, package.json, README with local serve
@@ -184,10 +185,20 @@ The MVP implements `docs/lessons/01-keys-and-chords.md`.
   light/dark theme, mobile layout check. Space keeps its normal job on buttons, piano keys
   and form fields; Esc stops all sound from anywhere.
 
+- **M8 Lesson 2 groundwork:** theory functions `functionOf`, `tension`, `commonTones`,
+  `leadingTone` and `flowPath` with unit tests (tests first). Move `chord-board.js` and
+  the voicing helpers to `js/lessons/common/`, add the board's `colorBy` option, and add
+  function color tokens for light and dark.
+- **M9 Lesson 2** sections 1–4, as specified in docs/lessons/02-harmonic-function.md,
+  including the flow diagram and the loop builder in section 4.
+- **M10 Lesson 2** sections 5–8: the tension curve, the minor preview, the experiment and
+  the quiz.
+
 Each milestone ends with a working app and a short manual test checklist.
 
 ## Out of scope for the MVP
-- All lessons after 01 and the genre lenses (see docs/curriculum.md).
+- All lessons after 02 and the genre lenses (see docs/curriculum.md). Lesson 02 comes
+  right after the MVP (M8–M10).
 - Progression builder with MIDI export.
 - Web MIDI input from a keyboard.
 - Ear training game modes beyond the lesson quizzes.

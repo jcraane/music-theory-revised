@@ -13,7 +13,7 @@ titles and main experiment) → **specified** (full spec following the template)
 | # | Lesson | Goal | Builds on | Status |
 |---|--------|------|-----------|--------|
 | 01 | Keys, scales and the chords inside them | Build the seven chords of any major or minor key and hear why their qualities differ | – | built |
-| 02 | Harmonic function: home, away, tension | Hear tonic, subdominant and dominant roles and predict how chords want to move | 01 | outlined |
+| 02 | Harmonic function: home, away, tension | Hear tonic, subdominant and dominant roles and predict how chords want to move | 01 | specified |
 | 03 | Cadences: how phrases end | Recognize authentic, plagal, half and deceptive cadences by ear | 02 | outlined |
 | 04 | Root motion and the circle of fifths | See and hear why moves by 5ths feel strong, by 3rds soft, by steps like climbing | 01, 02 | outlined |
 | 05 | Inversions and voice leading | Make progressions flow with inversions, common tones and small steps | 01 | outlined |
@@ -52,7 +52,9 @@ Tracks which lesson introduces a reusable component, so the cost of a lesson is 
 | Four-chord loop builder | 02 (built in 01, no longer used there) |
 | Quiz | 01 |
 | Sequence player with synced highlighting | 01 |
-| Tension meter | 02 |
+| Function colors on chord cards | 02 |
+| Flow diagram (tonic → subdominant → dominant) | 02 |
+| Tension meter (tension curve) | 02 |
 | Phrase player (chords with a simple top line) | 03 |
 | Circle of fifths | 04 |
 | Voice-leading view | 05 |

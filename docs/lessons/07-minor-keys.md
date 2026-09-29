@@ -34,3 +34,5 @@ Which minor scale is this; ear: minor v or major V.
 
 ## Open questions
 - Show ascending/descending melodic minor, or only the jazz version (same both ways)?
+- Define `tension()` for minor (left open in lesson 02): the weak v and VII against the
+  major V, and where ii° goes, since it contains the same tritone as vii° in major.
