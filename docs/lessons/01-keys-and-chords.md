@@ -139,8 +139,8 @@ Eight questions per attempt, generated from the theory engine so each attempt di
   - "What are the notes of [numeral] in [key]?" (e.g. IV in D major → G B D)
   - "What is the quality of the [n]th chord in a major key?"
   - "What is the relative minor of [key]?"
-- Multiple choice with four options; wrong options must be plausible (same key, neighboring
-  chords). Show the correct answer with a short explanation and a play button after each
+- Multiple choice with four options (three for major, minor or diminished); wrong options
+  must be plausible (same key, neighboring chords). Show the correct answer with a short explanation and a play button after each
   answer. Store the best score in storage.
 
 ## Genre connections
@@ -160,7 +160,7 @@ Eight questions per attempt, generated from the theory engine so each attempt di
   on any root, independent of the key, plus a check that flags notes outside the key.
 
 ## Implementation decisions
-Decided while building sections 1–4:
+Decided while building and reviewing the lesson:
 - Nothing plays on arrival: each section starts with a Listen button. The visual shows its
   finished state before listening (the full scale with W/H, the finished C triad).
 - The key selector offers the 12 major keys spelled with the fewest accidentals:
@@ -182,12 +182,12 @@ Decided while building sections 1–4:
 - Section 4: the raise/lower-the-third toggle is hidden for the diminished chord, since
   raising its third gives neither a major, minor nor diminished triad.
 - Starting a sound stops whatever else is playing, except notes played on the piano keys.
-
-Open, as built in sections 6–7:
-- Ear and quality questions have three options (major, minor, diminished), not four.
-- Wrong options: neighboring chords (which chord); the other third plus neighbors (which
+- Section 6: the swapped chords are numbered iv (Fm) and VI (A).
+- Quiz: ear and quality questions have three options (major, minor, diminished), not
+  four. A more flexible trainer comes later (lesson 13).
+- Quiz wrong options are real chords close to the answer: neighboring chords in the key
+  (which chord); the same root with the other third plus the neighboring chords (which
   notes); the parallel minor plus ii and iii (relative minor).
-- The swapped chords in section 6 are numbered iv (Fm) and VI (A).
 
 ## Out of scope
 - Harmonic function and why some chords pull towards others (lesson 02).
