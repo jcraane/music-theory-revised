@@ -1,5 +1,5 @@
-// Section 3: the seven chords of a key as cards, a four-chord loop builder,
-// and the diminished chord resolving to I.
+// Section 3: the seven chords of a key as cards with degree names and on a staff,
+// in any major key, plus I–V–vi–IV in that key and the diminished chord resolving to I.
 
 import { h } from '../../ui/dom.js';
 import { prettyName } from '../../ui/format.js';
@@ -15,6 +15,9 @@ const READ = [
     '(diminished). In every major key the pattern is the same: major on I, IV and V, minor ' +
     "on ii, iii and vi, diminished on vii°. That's why musicians talk in Roman numerals: a " +
     'I–V–vi–IV progression sounds the same in any key.',
+  'Each scale degree also has a name you will see often: tonic (I), supertonic (ii), ' +
+    'mediant (iii), subdominant (IV), dominant (V), submediant (vi) and leading tone (vii°). ' +
+    'The leading tone is a half step below the tonic and leans up towards it.',
 ];
 
 export default {
@@ -27,12 +30,18 @@ export default {
       read: READ,
     });
 
-    const board = createChordBoard(ctx, see);
+    const board = createChordBoard(ctx, see, { staff: true });
 
     const setKey = (tonic) => {
       board.setKey(tonic, 'major');
       caption.textContent = `The seven chords of ${prettyName(tonic)} major, one per beat.`;
     };
+
+    const progression = createPlayButton({
+      label: 'Play I–V–vi–IV',
+      primary: false,
+      play: () => board.playChords([1, 5, 6, 4].map((degree) => board.step(degree, 2)), { bpm: 100 }),
+    });
 
     const resolve = createPlayButton({
       label: 'Play vii°, then I',
@@ -41,11 +50,10 @@ export default {
     });
 
     tryIt.append(
-      h('p', {}, 'Click the cards to hear them. Pick four to build a loop; it plays as soon as it has four chords.'),
-      h('h3', { class: 'lesson-part__subtitle' }, 'Your loop'),
-      board.loop.element,
-      h('p', {}, 'Change the key: the loop keeps its numerals and moves with you.'),
+      h('p', {}, 'Pick a major key and listen to its seven chords. Click a card or a bar on the staff to hear one chord.'),
       createKeySelector({ tonics: commonTonics('major'), value: 'C', onChange: setKey }).element,
+      h('p', {}, 'The same numerals in any key: play I–V–vi–IV, then change the key and play it again.'),
+      h('div', { class: 'button-row' }, progression.element),
       h('h3', { class: 'lesson-part__subtitle' }, 'The unstable one'),
       h('p', {}, 'The diminished chord rarely stays on its own. Hear it, then hear where it wants to go.'),
       h('div', { class: 'button-row' }, resolve.element),

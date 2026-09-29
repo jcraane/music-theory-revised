@@ -56,6 +56,8 @@ music-theory-revised/
       choice-group.js radio group styled as pills (mode toggle)
       key-selector.js key picker built on the choice group
       loop-builder.js four-chord loop slots with play and clear
+      staff.js        treble staff with chords as whole notes (SVG)
+      staff-glyphs.js clef, notehead and accidental outlines from Bravura (OFL)
       role-legend.js  legend for the piano highlight colors
       format.js       display names with ♯ and ♭
     lessons/
@@ -74,10 +76,13 @@ music-theory-revised/
     audio.test.js
     piano.test.js
     format.test.js
+    staff.test.js
     quiz-questions.test.js
     router.test.js
     shortcuts.test.js
     storage.test.js
+  licenses/
+    OFL-bravura-glyphs.txt  license for the music glyphs
   docs/
     curriculum.md     lesson order, dependencies, status
     lessons/

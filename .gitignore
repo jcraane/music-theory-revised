@@ -3,3 +3,4 @@
 node_modules/
 docs/*.zip
 .playwright-mcp/
+*.iml

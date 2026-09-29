@@ -27,6 +27,19 @@ export function spellScale(tonic, mode) {
   });
 }
 
+const DEGREE_NAMES = ['tonic', 'supertonic', 'mediant', 'subdominant', 'dominant', 'submediant'];
+
+/**
+ * Name of a scale degree (1–7). The 7th is the leading tone in major, a half step below
+ * the tonic, and the subtonic in natural minor, a whole step below.
+ */
+export function degreeName(degree, mode) {
+  scaleSteps(mode);
+  if (!Number.isInteger(degree) || degree < 1 || degree > 7) throw new Error(`Degree must be 1–7, got ${degree}`);
+  if (degree === 7) return mode === 'major' ? 'leading tone' : 'subtonic';
+  return DEGREE_NAMES[degree - 1];
+}
+
 /** Tonic of the minor key with the same notes, on the 6th degree (C → A, F# → D#). */
 export function relativeMinor(tonic) {
   return spellScale(tonic, 'major')[5];

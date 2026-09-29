@@ -22,7 +22,8 @@ wants to move next.
 3. **Why V pulls:** the leading tone rising to the tonic; the tritone in vii° resolving
    inward. A zoomed-in two-voice view of the resolution.
 4. **The usual flow:** tonic → subdominant → dominant → tonic as the "grammar" of many
-   progressions. Build a loop; each chord gets its function color.
+   progressions. Build a loop; each chord gets its function color. (Reuse the four-chord
+   loop builder that was moved out of lesson 01 section 3: `js/ui/loop-builder.js`.)
 5. **Seeing tension:** the tension meter rises and falls as a loop plays.
 6. **Function in minor, a preview:** the minor v has no leading tone, so it pulls weakly.
    (Resolved properly in lesson 07.)

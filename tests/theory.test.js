@@ -2,7 +2,7 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { pitchClass, toMidi, toMidiAscending, intervalName, semitonesBetween } from '../js/theory/notes.js';
-import { scaleSteps, spellScale, relativeMinor, relativeMajor, commonTonics } from '../js/theory/scales.js';
+import { scaleSteps, spellScale, relativeMinor, relativeMajor, commonTonics, degreeName } from '../js/theory/scales.js';
 import {
   triad,
   chordQuality,
@@ -192,6 +192,27 @@ describe('spellScale', () => {
   test('rejects invalid input', () => {
     assert.throws(() => spellScale('H', 'major'));
     assert.throws(() => spellScale('C', 'lydian'));
+  });
+});
+
+describe('degreeName', () => {
+  test('names of the major scale degrees', () => {
+    assert.deepEqual(
+      [1, 2, 3, 4, 5, 6, 7].map((d) => degreeName(d, 'major')),
+      ['tonic', 'supertonic', 'mediant', 'subdominant', 'dominant', 'submediant', 'leading tone'],
+    );
+  });
+
+  test('the 7th of natural minor is the subtonic, a whole step below the tonic', () => {
+    assert.equal(degreeName(7, 'minor'), 'subtonic');
+    assert.equal(degreeName(1, 'minor'), 'tonic');
+    assert.equal(degreeName(6, 'minor'), 'submediant');
+  });
+
+  test('rejects invalid input', () => {
+    assert.throws(() => degreeName(0, 'major'));
+    assert.throws(() => degreeName(8, 'major'));
+    assert.throws(() => degreeName(1, 'dorian'));
   });
 });
 

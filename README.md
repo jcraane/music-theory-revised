@@ -20,3 +20,7 @@ mise run test
 ```
 
 See PLAN.md for the plan and roadmap.
+
+## Credits
+Music glyphs (clef, noteheads, accidentals) are taken from the Bravura font by Steinberg
+Media Technologies, under the SIL Open Font License; see `licenses/OFL-bravura-glyphs.txt`.

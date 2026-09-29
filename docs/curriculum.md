@@ -24,6 +24,7 @@ titles and main experiment) → **specified** (full spec following the template)
 | 10 | Secondary dominants | Briefly point to chords other than the tonic (V/V, V/vi) | 02, 03, 06 | outlined |
 | 11 | Tension devices | Pedal points, line clichés, chromatic mediants, key changes, planing | 04, 05, 08, 10 | outlined |
 | 12 | Harmonic rhythm and arrangement | How chord length, bass lines and splitting harmony across layers shape emotion | 05, 06 | outlined |
+| 13 | Arbitrary training | Intervbal ear training, chord identification (on keyboard) (which chord it is), chord identification ear (minor, major etc) | na | outlined |
 
 ## Genre lenses
 
@@ -47,6 +48,8 @@ Tracks which lesson introduces a reusable component, so the cost of a lesson is 
 |-----------|-----------------|
 | Piano keyboard | 01 |
 | Chord card | 01 |
+| Staff notation | 01 |
+| Four-chord loop builder | 01 (section 5), 02 |
 | Quiz | 01 |
 | Sequence player with synced highlighting | 01 |
 | Tension meter | 02 |

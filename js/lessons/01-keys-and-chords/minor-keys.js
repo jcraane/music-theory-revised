@@ -34,7 +34,7 @@ export default {
       read: READ,
     });
 
-    const board = createChordBoard(ctx, see, { legend: ['root', 'third', 'fifth', 'scale'] });
+    const board = createChordBoard(ctx, see, { legend: ['root', 'third', 'fifth', 'scale'], loop: true });
 
     // A major-key degree as a degree of whatever the board shows (vi of the major is i of the minor).
     const boardDegree = (degree) => (mode === 'major' ? degree : ((degree - 6 + 7) % 7) + 1);

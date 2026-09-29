@@ -627,6 +627,14 @@ button.button:disabled {
   font-weight: 600;
 }
 
+.chord-card__degree {
+  max-width: 100%;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  hyphens: auto;
+}
+
 .chord-card__notes,
 .chord-card__quality {
   color: var(--color-text-muted);
@@ -658,6 +666,10 @@ button.button:disabled {
 
   .chord-card__notes {
     font-size: 0.75rem;
+  }
+
+  .chord-card__degree {
+    font-size: 0.6875rem;
   }
 
   /* Color, border style and numeral case still show the quality; the label says it. */
@@ -781,6 +793,60 @@ button.button:disabled {
   margin: 0;
   padding-left: var(--space-4);
   font-size: var(--font-size-sm);
+}
+
+/* Staff */
+
+.staff {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.staff__svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.staff__line,
+.staff__barline {
+  stroke: var(--color-text);
+  stroke-width: 0.8;
+}
+
+.staff__glyph,
+.staff__accidental,
+.staff__final {
+  fill: var(--color-text);
+}
+
+/* Role colors with a thin outline, so light fills still read against the page. */
+.staff__note {
+  stroke: var(--color-text);
+  stroke-width: 14;
+}
+
+.staff__note--root { fill: var(--role-root); }
+.staff__note--third { fill: var(--role-third); }
+.staff__note--fifth { fill: var(--role-fifth); }
+
+.staff__label {
+  fill: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 9px;
+}
+
+.staff__bar {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.staff__bar:hover {
+  fill: color-mix(in srgb, var(--color-accent) 6%, transparent);
+}
+
+.staff__bar.is-active {
+  fill: color-mix(in srgb, var(--color-accent) 16%, transparent);
 }
 
 /* Outside-the-key chords and swaps */

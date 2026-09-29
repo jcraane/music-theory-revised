@@ -48,17 +48,23 @@ minor and diminished triads, and understand why a key's chords have the qualitie
 
 ### 3. The seven chords of a key
 - **Hear:** all seven triads of C major played in order, one per beat.
-- **See:** a row of seven chord cards (name, Roman numeral, notes). As each plays, its card
-  and notes on the piano highlight. Major cards, minor cards and the diminished card use
-  distinct visual treatments so the pattern is visible at a glance.
+- **See:** a row of seven chord cards (Roman numeral, degree name, chord name, notes) and
+  the same chords on a treble staff with the numerals underneath. As each plays, its card,
+  its bar on the staff and its notes on the piano highlight. Major cards, minor cards and
+  the diminished card use distinct visual treatments so the pattern is visible at a glance.
 - **Read:** "Build a triad on each of the seven notes and you get the seven chords of the
   key. Some sound bright (major), some darker (minor), and one sounds tense and unstable
   (diminished). In every major key the pattern is the same: major on I, IV and V, minor on
   ii, iii and vi, diminished on vii°. That's why musicians talk in Roman numerals: a
   I–V–vi–IV progression sounds the same in any key."
-- **Try:** click cards to play them in any order and build a four-chord loop by clicking
-  four cards; the loop plays repeatedly with synced highlighting. Change the key and hear
-  the same Roman numerals in a new key.
+  Second paragraph: "Each scale degree also has a name you will see often: tonic (I),
+  supertonic (ii), mediant (iii), subdominant (IV), dominant (V), submediant (vi) and
+  leading tone (vii°). The leading tone is a half step below the tonic and leans up
+  towards it."
+- **Try:** pick any of the 12 major keys and listen to its chords; click a card or a bar
+  on the staff to hear one chord. A "Play I–V–vi–IV" button plays that progression in the
+  selected key, so the same numerals can be heard in every key. Building your own loop is
+  not part of this section (see lesson 02, section 4).
 
 ### 4. Why the qualities differ
 - **Hear:** C–E played as a two-note interval, then D–F. Then C major and D minor triads.
@@ -149,8 +155,13 @@ Decided while building sections 1–4:
   C, Db, D, Eb, E, F, F#, G, Ab, A, Bb, B. Relative minors follow from these.
 - Only sections 1 and 3 have a key selector; sections 2 and 4 stay in C major.
 - Section 3: the chords are voiced with roots rising from the tonic, on a three-octave
-  piano. The loop starts playing as soon as its fourth chord is picked, and picking a card
-  after that starts a new loop. (Autostart is provisional; revisit after using it.)
+  piano. The staff shows exactly what plays, with accidentals next to the notes instead of
+  a key signature (key signatures come in lesson 04; this may be revisited).
+- Section 3 no longer has a loop builder: it distracted from the pattern of qualities.
+  The four-chord loop builder moves to lesson 02 (building a loop by function); section 5
+  still has one. Its loop starts playing as soon as its fourth chord is picked (provisional).
+- Degree names come from the theory module. In natural minor the 7th degree is the
+  subtonic (a whole step below the tonic), not the leading tone.
 - Section 4: the raise/lower-the-third toggle is hidden for the diminished chord, since
   raising its third gives neither a major, minor nor diminished triad.
 - Starting a sound stops whatever else is playing, except notes played on the piano keys.
