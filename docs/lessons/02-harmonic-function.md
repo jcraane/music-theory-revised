@@ -23,7 +23,8 @@ wants to move next.
    inward. A zoomed-in two-voice view of the resolution.
 4. **The usual flow:** tonic → subdominant → dominant → tonic as the "grammar" of many
    progressions. Build a loop; each chord gets its function color. (Reuse the four-chord
-   loop builder that was moved out of lesson 01 section 3: `js/ui/loop-builder.js`.)
+   loop builder that was moved out of lesson 01 sections 3 and 5: `js/ui/loop-builder.js`.
+   Decide whether it stays an option of lesson 01's chord board or moves elsewhere.)
 5. **Seeing tension:** the tension meter rises and falls as a loop plays.
 6. **Function in minor, a preview:** the minor v has no leading tone, so it pulls weakly.
    (Resolved properly in lesson 07.)

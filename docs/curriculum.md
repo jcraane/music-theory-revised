@@ -49,7 +49,7 @@ Tracks which lesson introduces a reusable component, so the cost of a lesson is 
 | Piano keyboard | 01 |
 | Chord card | 01 |
 | Staff notation | 01 |
-| Four-chord loop builder | 01 (section 5), 02 |
+| Four-chord loop builder | 02 (built in 01, no longer used there) |
 | Quiz | 01 |
 | Sequence player with synced highlighting | 01 |
 | Tension meter | 02 |

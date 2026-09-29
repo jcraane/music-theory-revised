@@ -1,7 +1,8 @@
 // The chords of a key as cards with degree names, optionally on a staff, above a piano.
-// Shared by section 3 (major keys) and section 5 (major and relative minor).
+// Shared by section 3 (major keys) and section 5 (minor keys and their relative major).
 // Clicking a card or a bar plays the chord. With `loop: true` a card is also added to a
-// four-chord loop builder, which plays once it has four chords.
+// four-chord loop builder, which plays once it has four chords. No section uses the loop
+// now; lesson 02 decides whether it stays here.
 
 import { h } from '../../ui/dom.js';
 import { prettyName } from '../../ui/format.js';
@@ -10,8 +11,8 @@ import { createLoopBuilder } from '../../ui/loop-builder.js';
 import { createStaff } from '../../ui/staff.js';
 import { roleLegend } from '../../ui/role-legend.js';
 import { diatonicChords } from '../../theory/chords.js';
-import { spellScale, degreeName } from '../../theory/scales.js';
-import { voice, keyOctave, voiceKeyChords, play, showTriad, midis } from './shared.js';
+import { spellScale, scaleSteps, degreeName } from '../../theory/scales.js';
+import { voice, keyOctave, voiceKeyChords, play, playScale, showScaleSteps, showTriad, midis } from './shared.js';
 
 export function createChordBoard(ctx, see, { legend = ['root', 'third', 'fifth'], loop: withLoop = false, staff: withStaff = false } = {}) {
   let chords = [];
@@ -32,6 +33,7 @@ export function createChordBoard(ctx, see, { legend = ['root', 'third', 'fifth']
     staff?.setActive(degree - 1);
     loop?.setActive(slot);
     piano.clear();
+    piano.clearAnnotations();
     showTriad(piano, voicings[degree - 1]);
     piano.setActive(voicings[degree - 1]);
   }
@@ -51,6 +53,14 @@ export function createChordBoard(ctx, see, { legend = ['root', 'third', 'fifth']
   }
 
   const playOne = (degree) => playChords([step(degree, 2)], { bpm: 100 });
+
+  // A key's scale from the tonic up to the tonic an octave higher.
+  const scaleNotes = (tonic, mode) => {
+    const names = spellScale(tonic, mode);
+    return voice([...names, names[0]], keyOctave(tonic));
+  };
+
+  const markTonics = (notes) => piano.highlight([notes[0], notes.at(-1)], 'root');
 
   const loop = withLoop
     ? createLoopBuilder({ play: (degrees) => playChords(loopSteps(degrees), { bpm: 100, loop: true }) })
@@ -86,15 +96,22 @@ export function createChordBoard(ctx, see, { legend = ['root', 'third', 'fifth']
       loop?.setChords(chords);
       loop?.handle?.setSteps(loopSteps(loop.degrees));
       piano.clear();
+      piano.clearAnnotations();
       showTriad(piano, voicings[0]);
     },
 
-    /** Shows the key's scale from the tonic, with the tonic marked as home (root color). */
+    /** Shows the key's scale with its W and H steps, and the tonic marked as home (root color). */
     showScale(tonic, mode) {
-      const notes = voice(spellScale(tonic, mode), keyOctave(tonic));
+      const notes = scaleNotes(tonic, mode);
       piano.clear();
-      piano.highlight(notes, 'scale');
-      piano.highlight([notes[0]], 'root');
+      showScaleSteps(piano, notes, scaleSteps(mode));
+      markTonics(notes);
+    },
+
+    /** Plays the key's scale up and down, then shows it as showScale() does. */
+    playScale(tonic, mode) {
+      const notes = scaleNotes(tonic, mode);
+      return playScale(ctx, piano, notes, scaleSteps(mode), { onEnd: () => markTonics(notes) });
     },
   };
 }

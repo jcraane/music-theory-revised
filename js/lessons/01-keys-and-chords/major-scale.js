@@ -5,7 +5,7 @@ import { prettyName } from '../../ui/format.js';
 import { sectionLayout } from '../../ui/section-layout.js';
 import { createKeySelector } from '../../ui/key-selector.js';
 import { spellScale, scaleSteps, commonTonics } from '../../theory/scales.js';
-import { voice, play } from './shared.js';
+import { voice, showScaleSteps, playScale } from './shared.js';
 
 const READ = [
   'Almost every song you know is built on a scale: seven notes out of the twelve on the ' +
@@ -21,7 +21,7 @@ export default {
     let tonic = 'C';
 
     const { see, tryIt, caption } = sectionLayout(container, {
-      listen: () => playScale(),
+      listen: () => playTonicScale(),
       caption: captionFor(tonic),
       read: READ,
     });
@@ -34,31 +34,8 @@ export default {
       return voice([...names, names[0]]);
     };
 
-    const showScale = () => {
-      const notes = scaleNotes();
-      piano.clear();
-      piano.clearAnnotations();
-      piano.highlight(notes, 'scale');
-      scaleSteps('major').forEach((step, i) => piano.annotate(notes[i].midi, notes[i + 1].midi, step));
-    };
-
-    function playScale() {
-      const up = scaleNotes();
-      const steps = scaleSteps('major');
-      const down = up.slice(0, -1).reverse();
-      piano.clear();
-      piano.clearAnnotations();
-
-      return play(ctx, [...up, ...down].map((note, i) => ({ notes: [note.midi], note, i })), {
-        bpm: 100,
-        onStep: ({ note, i }) => {
-          piano.highlight([note], 'scale');
-          piano.setActive([note]);
-          if (i > 0 && i < up.length) piano.annotate(up[i - 1].midi, note.midi, steps[i - 1]);
-        },
-        onEnd: () => piano.setActive([]),
-      });
-    }
+    const showScale = () => showScaleSteps(piano, scaleNotes(), scaleSteps('major'));
+    const playTonicScale = () => playScale(ctx, piano, scaleNotes(), scaleSteps('major'));
 
     const selector = createKeySelector({
       tonics: commonTonics('major'),
@@ -66,7 +43,7 @@ export default {
       onChange: (value) => {
         tonic = value;
         caption.textContent = captionFor(tonic);
-        playScale();
+        playTonicScale();
       },
     });
 

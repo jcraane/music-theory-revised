@@ -82,17 +82,29 @@ minor and diminished triads, and understand why a key's chords have the qualitie
   semitone to hear major turn into minor and back.
 
 ### 5. Minor keys
-- **Hear:** the loop C–F–G–C, then Am–F–G–Am. Same notes available, different home.
-- **See:** the A natural minor scale on the piano uses exactly the same white keys as C
-  major. Chord cards for A minor: i ii° III iv v VI VII.
+- **Hear:** the seven triads of A minor played in order, one per beat: i ii° III iv v VI VII.
+- **See:** the A natural minor scale on the piano with W and H labels between the notes
+  (W H W W H W W) and the tonic marked as home. It uses exactly the same white keys as
+  C major. Below it, as in section 3: chord cards with Roman numeral, degree name, chord
+  name and notes, and the same chords on a treble staff with the numerals underneath
+  (key label "a:"). As each chord plays, its card, its bar and its notes highlight.
 - **Read:** "Every major key has a relative minor that shares all its notes. Start the
-  C major scale on A instead of C and you get A natural minor: same notes, but a darker
-  home. The chords are the same seven, just renumbered from the new tonic, so the pattern
-  becomes i ii° III iv v VI VII. What makes something feel major or minor isn't the notes
-  available, it's which chord feels like home."
-- **Try:** a toggle switches between a major key and its relative minor, with the cards
-  renumbering and the loops re-centering. The user picks a key and builds a loop in the
-  minor version.
+  C major scale on its 6th note, A, and you get A natural minor: the same notes, but a
+  darker home. The steps now run W H W W H W W. It is the major pattern started from a
+  different place, so the half steps fall between notes 2 and 3 and between 5 and 6.
+  Counting the other way, the relative major starts on the 3rd note of the minor scale."
+  Second paragraph: "The chords are the same seven too, renumbered from the new tonic:
+  i ii° III iv v VI VII. The degree names stay, except for the 7th. In natural minor it
+  sits a whole step below the tonic and is called the subtonic, not the leading tone.
+  What makes music feel major or minor isn't the notes available, it's which chord feels
+  like home."
+- **Try:** pick any of the 12 minor keys, and toggle between it and its relative major:
+  the scale's steps start from the new tonic and the cards and staff renumber, while the
+  notes stay the same. Listen follows the toggle. Click a card or a bar on the staff to
+  hear one chord. A "Play the scale" button plays the shown scale up and down with its
+  steps, as in section 1. Under "Same notes, different home", a "Play I–IV–V–I, then
+  i–VI–VII–i" button plays C–F–G–C, then Am–F–G–Am in the selected key pair. Building a
+  loop is not part of this section (see lesson 02, section 4).
 
 ### 6. Experiment: sticking out
 - **Hear:** C–Am–F–G in C major.
@@ -153,23 +165,25 @@ Decided while building sections 1–4:
   finished state before listening (the full scale with W/H, the finished C triad).
 - The key selector offers the 12 major keys spelled with the fewest accidentals:
   C, Db, D, Eb, E, F, F#, G, Ab, A, Bb, B. Relative minors follow from these.
-- Only sections 1 and 3 have a key selector; sections 2 and 4 stay in C major.
+- Sections 1, 3 and 5 have a key selector; sections 2 and 4 stay in C major. Section 5's
+  selector offers the 12 minor keys that are relative to those major keys:
+  C, C#, D, D#, E, F, F#, G, G#, A, Bb, B. It starts on A minor.
 - Section 3: the chords are voiced with roots rising from the tonic, on a three-octave
   piano. The staff shows exactly what plays, with accidentals next to the notes instead of
   a key signature (key signatures come in lesson 04; this may be revisited).
-- Section 3 no longer has a loop builder: it distracted from the pattern of qualities.
-  The four-chord loop builder moves to lesson 02 (building a loop by function); section 5
-  still has one. Its loop starts playing as soon as its fourth chord is picked (provisional).
+- Sections 3 and 5 have no loop builder: it distracted from the pattern of qualities.
+  The four-chord loop builder moves to lesson 02 (building a loop by function); lesson 02
+  decides whether the chord board keeps its loop option.
+- Section 5 follows section 3: the seven chords on cards and a staff, voiced the same way,
+  with the scale and its W/H steps from section 1 on the same piano. Playing a chord
+  replaces the scale view with the triad; "Play the scale" brings the scale back.
 - Degree names come from the theory module. In natural minor the 7th degree is the
   subtonic (a whole step below the tonic), not the leading tone.
 - Section 4: the raise/lower-the-third toggle is hidden for the diminished chord, since
   raising its third gives neither a major, minor nor diminished triad.
 - Starting a sound stops whatever else is playing, except notes played on the piano keys.
 
-Open, as built in sections 5–7 (to revisit together with sections 3 and 5):
-- Switching major/minor keeps a loop's degrees, so i–VI–III–VII (Am F C G) becomes
-  I–vi–iii–vii° (C Am Em Bdim). Alternative: keep the chords and only renumber them.
-- Section 5's Listen plays I–IV–V–I and i–VI–VII–i for the selected key pair, not only C/Am.
+Open, as built in sections 6–7:
 - Ear and quality questions have three options (major, minor, diminished), not four.
 - Wrong options: neighboring chords (which chord); the other third plus neighbors (which
   notes); the parallel minor plus ii and iii (relative minor).

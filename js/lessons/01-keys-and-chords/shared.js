@@ -34,6 +34,36 @@ export function play(ctx, steps, options) {
   return ctx.audio.playSequence(steps, options);
 }
 
+/** Shows a scale's notes (the tonic repeated on top) with the W and H steps between them. */
+export function showScaleSteps(piano, notes, steps) {
+  piano.clearAnnotations();
+  piano.highlight(notes, 'scale');
+  steps.forEach((step, i) => piano.annotate(notes[i].midi, notes[i + 1].midi, step));
+}
+
+/**
+ * Plays a scale up and down at 100 BPM. Each note lights up as it plays, and the steps
+ * appear on the way up. `onEnd` runs only if the scale plays to the end.
+ */
+export function playScale(ctx, piano, up, steps, { onEnd } = {}) {
+  const down = up.slice(0, -1).reverse();
+  piano.clear();
+  piano.clearAnnotations();
+
+  return play(ctx, [...up, ...down].map((note, i) => ({ notes: [note.midi], note, i })), {
+    bpm: 100,
+    onStep: ({ note, i }) => {
+      piano.highlight([note], 'scale');
+      piano.setActive([note]);
+      if (i > 0 && i < up.length) piano.annotate(up[i - 1].midi, note.midi, steps[i - 1]);
+    },
+    onEnd: () => {
+      piano.setActive([]);
+      onEnd?.();
+    },
+  });
+}
+
 /** Colors a voiced triad [root, third, fifth] by role. */
 export function showTriad(piano, notes) {
   notes.forEach((note, i) => piano.highlight([note], ROLES[i]));

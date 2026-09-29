@@ -65,7 +65,7 @@ music-theory-revised/
       01-keys-and-chords/
         index.js      lesson definition and section order
         shared.js     voicing and playback helpers
-        chord-board.js  chord cards, piano and loop builder for a key (sections 3 and 5)
+        chord-board.js  chord cards, staff, scale and piano for a key (sections 3 and 5)
         quiz-questions.js  quiz generator (pure, unit-tested)
         <section>.js  one file per section
   dev/
