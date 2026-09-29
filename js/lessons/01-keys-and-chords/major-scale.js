@@ -5,7 +5,7 @@ import { prettyName } from '../../ui/format.js';
 import { sectionLayout } from '../../ui/section-layout.js';
 import { createKeySelector } from '../../ui/key-selector.js';
 import { spellScale, scaleSteps, commonTonics } from '../../theory/scales.js';
-import { voice, showScaleSteps, playScale } from './shared.js';
+import { voice, showScaleSteps, playScale } from '../common/shared.js';
 
 const READ = [
   'Almost every song you know is built on a scale: seven notes out of the twelve on the ' +

@@ -40,6 +40,11 @@ export function degreeName(degree, mode) {
   return DEGREE_NAMES[degree - 1];
 }
 
+/** The 7th degree of a major key, a half step below the tonic (C → B, G → F#). */
+export function leadingTone(tonic) {
+  return spellScale(tonic, 'major')[6];
+}
+
 /** Tonic of the minor key with the same notes, on the 6th degree (C → A, F# → D#). */
 export function relativeMinor(tonic) {
   return spellScale(tonic, 'major')[5];

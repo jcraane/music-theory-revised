@@ -1,20 +1,28 @@
-// The chords of a key as cards with degree names, optionally on a staff, above a piano.
-// Shared by section 3 (major keys) and section 5 (minor keys and their relative major).
-// Clicking a card or a bar plays the chord. With `loop: true` a card is also added to a
-// four-chord loop builder, which plays once it has four chords. No section uses the loop
-// now; lesson 02 decides whether it stays here.
+// The chords of a key as cards, optionally on a staff, above a piano. Used by lesson 01
+// sections 3 and 5 and by lesson 02. Clicking a card or a bar plays the chord. With
+// `loop: true` a card is also added to a four-chord loop builder, which plays once it has
+// four chords. `colorBy` picks the card treatment: "quality" (major, minor, diminished,
+// with degree names) or "function" (tonic, subdominant, dominant, with the function named).
 
 import { h } from '../../ui/dom.js';
-import { prettyName } from '../../ui/format.js';
+import { prettyName, functionLabel } from '../../ui/format.js';
 import { createChordCard } from '../../ui/chord-card.js';
 import { createLoopBuilder } from '../../ui/loop-builder.js';
 import { createStaff } from '../../ui/staff.js';
 import { roleLegend } from '../../ui/role-legend.js';
 import { diatonicChords } from '../../theory/chords.js';
+import { functionOf } from '../../theory/harmony.js';
 import { spellScale, scaleSteps, degreeName } from '../../theory/scales.js';
 import { voice, keyOctave, voiceKeyChords, play, playScale, showScaleSteps, showTriad, midis } from './shared.js';
 
-export function createChordBoard(ctx, see, { legend = ['root', 'third', 'fifth'], loop: withLoop = false, staff: withStaff = false } = {}) {
+export function createChordBoard(ctx, see, {
+  legend = ['root', 'third', 'fifth'],
+  loop: withLoop = false,
+  staff: withStaff = false,
+  colorBy = 'quality',
+} = {}) {
+  if (colorBy !== 'quality' && colorBy !== 'function') throw new Error(`Unknown colorBy: ${colorBy}`);
+
   let chords = [];
   let voicings = [];
   let cards = [];
@@ -83,8 +91,10 @@ export function createChordBoard(ctx, see, { legend = ['root', 'third', 'fifth']
     /** Shows the chords of a key. A playing loop keeps its degrees and moves to the new key. */
     setKey(tonic, mode) {
       chords = diatonicChords(tonic, mode);
+      if (colorBy === 'function') chords = chords.map((chord) => ({ ...chord, fn: functionOf(chord.degree, mode) }));
       voicings = voiceKeyChords(tonic, mode, chords);
-      cards = chords.map((chord) => createChordCard(chord, { onSelect: selectCard, detail: degreeName(chord.degree, mode) }));
+      const detail = (chord) => (chord.fn ? functionLabel(chord.fn) : degreeName(chord.degree, mode));
+      cards = chords.map((chord) => createChordCard(chord, { onSelect: selectCard, detail: detail(chord) }));
       cardRow.replaceChildren(...cards.map((card) => card.element));
       // Key label as in analysis: "C:" for major, "a:" for minor.
       const key = prettyName(tonic);

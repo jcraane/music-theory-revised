@@ -7,7 +7,7 @@ import { createChordCard } from '../../ui/chord-card.js';
 import { roleLegend } from '../../ui/role-legend.js';
 import { spellScale } from '../../theory/scales.js';
 import { diatonicChords, buildTriad, chordName, romanNumeral, notesOutsideKey } from '../../theory/chords.js';
-import { voice, play, midis } from './shared.js';
+import { voice, play, midis } from '../common/shared.js';
 
 const READ = ['Every chord so far came from the key. What happens if we use one that doesn\'t?'];
 

@@ -1,7 +1,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { prettyName } from '../js/ui/format.js';
+import { prettyName, functionLabel } from '../js/ui/format.js';
 
 describe('prettyName', () => {
   test('note names use sharp and flat signs', () => {
@@ -23,5 +23,17 @@ describe('prettyName', () => {
   test('leaves anything else alone', () => {
     assert.equal(prettyName('vii°'), 'vii°');
     assert.equal(prettyName(''), '');
+  });
+});
+
+describe('functionLabel', () => {
+  test('names the family', () => {
+    assert.equal(functionLabel({ family: 'tonic', strength: 'normal' }), 'tonic');
+    assert.equal(functionLabel({ family: 'subdominant', strength: 'normal' }), 'subdominant');
+    assert.equal(functionLabel({ family: 'dominant', strength: 'normal' }), 'dominant');
+  });
+
+  test('marks weak dominants', () => {
+    assert.equal(functionLabel({ family: 'dominant', strength: 'weak' }), 'weak dominant');
   });
 });

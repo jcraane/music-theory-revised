@@ -43,6 +43,14 @@
   --quality-dim: #9b4a8c;
   --quality-dim-bg: #f6e8f3;
 
+  /* Chord function treatments on cards (lesson 02 onwards) */
+  --function-tonic: #2f8a4e;
+  --function-tonic-bg: #e4f3e8;
+  --function-subdominant: #5b54c4;
+  --function-subdominant-bg: #ebe9fa;
+  --function-dominant: #cc5520;
+  --function-dominant-bg: #fcebe2;
+
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
@@ -99,6 +107,12 @@
     --quality-minor-bg: #1b2336;
     --quality-dim: #d58cc6;
     --quality-dim-bg: #2e1b2a;
+    --function-tonic: #6fcf8f;
+    --function-tonic-bg: #17281d;
+    --function-subdominant: #a49cf2;
+    --function-subdominant-bg: #221f38;
+    --function-dominant: #f28a5a;
+    --function-dominant-bg: #2e1d15;
   }
 }
 
@@ -140,6 +154,12 @@
   --quality-minor-bg: #1b2336;
   --quality-dim: #d58cc6;
   --quality-dim-bg: #2e1b2a;
+  --function-tonic: #6fcf8f;
+  --function-tonic-bg: #17281d;
+  --function-subdominant: #a49cf2;
+  --function-subdominant-bg: #221f38;
+  --function-dominant: #f28a5a;
+  --function-dominant-bg: #2e1d15;
 }
 
 :root[data-theme="light"] {

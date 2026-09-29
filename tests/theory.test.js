@@ -2,7 +2,7 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { pitchClass, toMidi, toMidiAscending, intervalName, semitonesBetween } from '../js/theory/notes.js';
-import { scaleSteps, spellScale, relativeMinor, relativeMajor, commonTonics, degreeName } from '../js/theory/scales.js';
+import { scaleSteps, spellScale, relativeMinor, relativeMajor, commonTonics, degreeName, leadingTone } from '../js/theory/scales.js';
 import {
   triad,
   chordQuality,
@@ -11,7 +11,9 @@ import {
   diatonicChords,
   buildTriad,
   notesOutsideKey,
+  commonTones,
 } from '../js/theory/chords.js';
+import { functionOf, tension, flowPath } from '../js/theory/harmony.js';
 
 // The 15 major and 15 minor keys with standard key signatures.
 const MAJOR_TONICS = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'Cb'];
@@ -428,5 +430,116 @@ describe('notesOutsideKey', () => {
 
   test('compares spelling, not just pitch', () => {
     assert.deepEqual(notesOutsideKey(['Fb'], cMajor), ['Fb']);
+  });
+});
+
+describe('leadingTone', () => {
+  test('is the 7th degree of the major scale, a half step below the tonic', () => {
+    assert.equal(leadingTone('C'), 'B');
+    assert.equal(leadingTone('G'), 'F#');
+    assert.equal(leadingTone('F'), 'E');
+    assert.equal(leadingTone('Db'), 'C');
+  });
+
+  test('is a half step below the tonic in every major key', () => {
+    for (const tonic of MAJOR_TONICS) {
+      assert.equal(semitonesBetween(leadingTone(tonic), tonic), 1, tonic);
+    }
+  });
+});
+
+describe('commonTones', () => {
+  const chord = (tonic, degree) => diatonicChords(tonic, 'major')[degree - 1].notes;
+
+  test('lists the notes two chords share, in the order of the first', () => {
+    assert.deepEqual(commonTones(chord('C', 1), chord('C', 6)), ['C', 'E']);
+    assert.deepEqual(commonTones(chord('C', 1), chord('C', 5)), ['G']);
+    assert.deepEqual(commonTones(chord('C', 4), chord('C', 5)), []);
+  });
+
+  test('stand-ins share two notes with their family head', () => {
+    assert.deepEqual(commonTones(chord('C', 1), chord('C', 3)), ['E', 'G']);
+    assert.deepEqual(commonTones(chord('C', 4), chord('C', 2)), ['F', 'A']);
+    assert.deepEqual(commonTones(chord('C', 5), chord('C', 7)), ['B', 'D']);
+  });
+
+  test('compares spelling, not just pitch', () => {
+    assert.deepEqual(commonTones(['C', 'E', 'G#'], ['C', 'E', 'Ab']), ['C', 'E']);
+  });
+});
+
+describe('functionOf', () => {
+  const families = (mode) => [1, 2, 3, 4, 5, 6, 7].map((degree) => functionOf(degree, mode).family);
+  const strengths = (mode) => [1, 2, 3, 4, 5, 6, 7].map((degree) => functionOf(degree, mode).strength);
+
+  test('major: I vi iii tonic, IV ii subdominant, V vii° dominant', () => {
+    assert.deepEqual(families('major'),
+      ['tonic', 'subdominant', 'tonic', 'subdominant', 'dominant', 'tonic', 'dominant']);
+    assert.deepEqual(strengths('major'), Array(7).fill('normal'));
+  });
+
+  test('minor: i III VI tonic, ii° iv subdominant, v VII dominant', () => {
+    assert.deepEqual(families('minor'),
+      ['tonic', 'subdominant', 'tonic', 'subdominant', 'dominant', 'tonic', 'dominant']);
+  });
+
+  test('minor: v and VII are weak dominants, since neither has a leading tone', () => {
+    assert.deepEqual(strengths('minor'), ['normal', 'normal', 'normal', 'normal', 'weak', 'normal', 'weak']);
+  });
+
+  test('rejects bad degrees and modes', () => {
+    assert.throws(() => functionOf(0, 'major'));
+    assert.throws(() => functionOf(8, 'major'));
+    assert.throws(() => functionOf(1, 'dorian'));
+  });
+});
+
+describe('tension', () => {
+  test('major: I 0, vi 1, iii 1.5, IV 2, ii 2.5, V 3, vii° 4', () => {
+    assert.deepEqual([1, 2, 3, 4, 5, 6, 7].map((degree) => tension(degree, 'major')), [0, 2.5, 1.5, 2, 3, 1, 4]);
+  });
+
+  test('minor is not defined yet (lesson 07)', () => {
+    assert.throws(() => tension(1, 'minor'), /lesson 07/);
+  });
+
+  test('rejects bad degrees', () => {
+    assert.throws(() => tension(0, 'major'));
+    assert.throws(() => tension(1.5, 'major'));
+  });
+});
+
+describe('flowPath', () => {
+  test('gives the function of each chord in order', () => {
+    assert.deepEqual(flowPath([1, 4, 5, 1], 'major').functions, ['tonic', 'subdominant', 'dominant', 'tonic']);
+  });
+
+  test('I–IV–V–I follows the usual flow', () => {
+    assert.deepEqual(flowPath([1, 4, 5, 1], 'major').backwards, []);
+  });
+
+  test('I–V–IV–I has one backwards move, from V to IV', () => {
+    assert.deepEqual(flowPath([1, 5, 4, 1], 'major').backwards, [{ from: 1, to: 2 }]);
+  });
+
+  test('I–vi–IV–V has none, including the loop back from V to I', () => {
+    assert.deepEqual(flowPath([1, 6, 4, 5], 'major', { loop: true }).backwards, []);
+  });
+
+  test('a loop can run backwards on its way round', () => {
+    // IV–I–ii–V: V back to IV when the loop starts again.
+    assert.deepEqual(flowPath([4, 1, 2, 5], 'major').backwards, []);
+    assert.deepEqual(flowPath([4, 1, 2, 5], 'major', { loop: true }).backwards, [{ from: 3, to: 0 }]);
+  });
+
+  test('skipping a family or going home from away is not backwards', () => {
+    assert.deepEqual(flowPath([1, 5, 1], 'major').backwards, []);
+    assert.deepEqual(flowPath([1, 4, 1], 'major').backwards, []);
+  });
+
+  test('works in minor', () => {
+    // i–VI–VII–i follows the flow; i–v–iv–i runs backwards from v to iv.
+    assert.deepEqual(flowPath([1, 6, 7, 1], 'minor').backwards, []);
+    assert.deepEqual(flowPath([1, 5, 4, 1], 'minor').backwards, [{ from: 1, to: 2 }]);
   });
 });

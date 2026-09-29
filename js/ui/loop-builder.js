@@ -28,6 +28,8 @@ export function createLoopBuilder({ length = 4, play }) {
         ? [h('span', { class: 'loop-slot__numeral' }, chord.roman), h('span', { class: 'loop-slot__name' }, prettyName(chord.name))]
         : [h('span', { class: 'loop-slot__empty' }, String(i + 1))]));
       el.dataset.quality = chord?.quality ?? '';
+      el.dataset.function = chord?.fn?.family ?? '';
+      el.dataset.strength = chord?.fn?.strength ?? '';
       el.setAttribute('aria-label', chord ? `Chord ${i + 1}: ${chord.roman}, ${prettyName(chord.name)}` : `Chord ${i + 1}: empty`);
     });
     playButton.element.disabled = degrees.length < length;
@@ -54,7 +56,10 @@ export function createLoopBuilder({ length = 4, play }) {
       return true;
     },
 
-    /** The chords the degrees refer to (a key's diatonicChords); renumbers the slots. */
+    /**
+     * The chords the degrees refer to (a key's diatonicChords, optionally with `fn` to color
+     * slots by function); renumbers the slots.
+     */
     setChords(list) {
       chords = list;
       render();

@@ -1,7 +1,8 @@
 // A chord as a card: Roman numeral, name, notes and quality. The whole card is a button.
 // `chord` is a diatonicChords() entry: { roman, name, notes, quality }, optionally with
-// `outside: true` for a chord that uses notes from outside the key. `detail` is an optional
-// extra line under the numeral, such as the degree name ("dominant").
+// `outside: true` for a chord that uses notes from outside the key, and optionally with
+// `fn` (a functionOf() result) to color the card by function instead of quality. `detail`
+// is an optional extra line under the numeral, such as the degree name ("dominant").
 
 import { h } from './dom.js';
 import { prettyName } from './format.js';
@@ -15,6 +16,8 @@ export function createChordCard(chord, { onSelect, detail }) {
     class: 'chord-card',
     'data-quality': chord.quality,
     'data-outside': chord.outside ? 'true' : null,
+    'data-function': chord.fn?.family ?? null,
+    'data-strength': chord.fn?.strength ?? null,
     'aria-label': `${chord.roman}${detail ? ` (${detail})` : ''}, ${prettyName(chord.name)}, ${quality}: ${notes}`,
     onclick: () => onSelect(chord),
   },

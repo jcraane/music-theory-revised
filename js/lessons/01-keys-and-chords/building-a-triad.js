@@ -5,7 +5,7 @@ import { prettyName } from '../../ui/format.js';
 import { sectionLayout } from '../../ui/section-layout.js';
 import { roleLegend } from '../../ui/role-legend.js';
 import { spellScale } from '../../theory/scales.js';
-import { voice, play, intervalBetween, midis, showTriad } from './shared.js';
+import { voice, play, intervalBetween, midis, showTriad } from '../common/shared.js';
 
 const READ = [
   'A chord is built by stacking every other note of the scale: take one, skip one, take ' +

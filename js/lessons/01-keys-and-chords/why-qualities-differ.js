@@ -8,7 +8,7 @@ import { createPlayButton } from '../../ui/play-button.js';
 import { roleLegend } from '../../ui/role-legend.js';
 import { semitonesBetween, intervalName } from '../../theory/notes.js';
 import { diatonicChords, buildTriad, chordName } from '../../theory/chords.js';
-import { voice, play, showTriad, intervalBetween, midis } from './shared.js';
+import { voice, play, showTriad, intervalBetween, midis } from '../common/shared.js';
 
 const READ = [
   'The difference between major and minor is one semitone in the middle note. A major third ' +

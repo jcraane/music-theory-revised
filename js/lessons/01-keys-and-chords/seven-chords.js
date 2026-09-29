@@ -7,7 +7,7 @@ import { sectionLayout } from '../../ui/section-layout.js';
 import { createKeySelector } from '../../ui/key-selector.js';
 import { createPlayButton } from '../../ui/play-button.js';
 import { commonTonics } from '../../theory/scales.js';
-import { createChordBoard } from './chord-board.js';
+import { createChordBoard } from '../common/chord-board.js';
 
 const READ = [
   'Build a triad on each of the seven notes and you get the seven chords of the key. Some ' +

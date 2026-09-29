@@ -1,4 +1,4 @@
-// Helpers shared by lesson 01's sections.
+// Helpers shared by lesson sections: voicings, playback and piano highlights.
 
 import { toMidiAscending, semitonesBetween, intervalName, pitchClass } from '../../theory/notes.js';
 import { spellScale } from '../../theory/scales.js';

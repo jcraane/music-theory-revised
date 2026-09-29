@@ -79,6 +79,11 @@ export function notesOutsideKey(notes, scaleNotes) {
   return notes.filter((note) => !scaleNotes.includes(note));
 }
 
+/** Notes two chords share, in the order of the first, compared by spelling (C and Am → C E). */
+export function commonTones(a, b) {
+  return a.filter((note) => b.includes(note));
+}
+
 function assertDegree(degree) {
   if (!Number.isInteger(degree) || degree < 1 || degree > 7) {
     throw new Error(`Degree must be 1–7, got ${degree}`);

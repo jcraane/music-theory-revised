@@ -36,8 +36,9 @@ music-theory-revised/
     storage.js        load/save settings and progress
     theory/
       notes.js        pitch classes, spelling, MIDI conversion
-      scales.js       major and natural minor scales
-      chords.js       triads, qualities, diatonic chords, Roman numerals
+      scales.js       major and natural minor scales, degree names, leading tone
+      chords.js       triads, qualities, diatonic chords, Roman numerals, common tones
+      harmony.js      chord function, tension and a progression's flow (lesson 02)
     audio/
       engine.js       AudioContext, master chain (compressor, reverb), unlock on gesture
       instruments.js  "keys" (soft electric-piano-like) and "pad"
@@ -59,13 +60,15 @@ music-theory-revised/
       staff.js        treble staff with chords as whole notes (SVG)
       staff-glyphs.js clef, notehead and accidental outlines from Bravura (OFL)
       role-legend.js  legend for the piano highlight colors
-      format.js       display names with ♯ and ♭
+      format.js       display names with ♯ and ♭, chord function labels
     lessons/
       registry.js     list of lessons and their order
+      common/
+        shared.js     voicing, playback and piano highlight helpers
+        chord-board.js  chord cards, staff, scale, piano and optional loop builder for a
+                      key, colored by quality or by function
       01-keys-and-chords/
         index.js      lesson definition and section order
-        shared.js     voicing and playback helpers
-        chord-board.js  chord cards, staff, scale and piano for a key (sections 3 and 5)
         quiz-questions.js  quiz generator (pure, unit-tested)
         <section>.js  one file per section
   dev/
@@ -107,6 +110,16 @@ Correct spelling matters: every note name in a key uses each letter once
 - `romanNumeral(degree, quality)` → "I", "ii", "vii°" (uppercase major, lowercase minor, ° diminished)
 - `diatonicChords(tonic, mode)` → [{ degree, roman, name, notes, quality }]
 - `toMidi(noteName, octave)` and `intervalName(semitones)` ("major 3rd", "perfect 5th")
+
+Added for lesson 02 (see docs/lessons/02-harmonic-function.md):
+- `leadingTone(tonic)` → the 7th degree of the major scale ("G" → "F#")
+- `commonTones(notesA, notesB)` → shared note names by spelling (C and Am → C E)
+- `functionOf(degree, mode)` → { family: "tonic" | "subdominant" | "dominant", strength:
+  "normal" | "weak" }; v and VII in minor are weak dominants
+- `tension(degree, mode)` → I 0, vi 1, iii 1.5, IV 2, ii 2.5, V 3, vii° 4; major only
+  until lesson 07
+- `flowPath(degrees, mode, { loop })` → { functions, backwards: [{ from, to }] }, where a
+  backwards move goes from a dominant to a subdominant
 
 Decisions:
 - Chord names: "C", "Cm", "Cdim", "Caug". Roman numerals still use ° and +.

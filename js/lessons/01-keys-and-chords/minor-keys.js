@@ -9,7 +9,7 @@ import { createKeySelector } from '../../ui/key-selector.js';
 import { createChoiceGroup } from '../../ui/choice-group.js';
 import { createPlayButton } from '../../ui/play-button.js';
 import { commonTonics, relativeMajor } from '../../theory/scales.js';
-import { createChordBoard } from './chord-board.js';
+import { createChordBoard } from '../common/chord-board.js';
 
 const READ = [
   'Every major key has a relative minor that shares all its notes. Start the C major scale ' +

@@ -3,7 +3,7 @@
 import { h } from '../../ui/dom.js';
 import { renderQuiz } from '../../ui/quiz.js';
 import { createQuestions } from './quiz-questions.js';
-import { voice, play, midis } from './shared.js';
+import { voice, play, midis } from '../common/shared.js';
 
 export default {
   id: 'check-yourself',

@@ -645,6 +645,13 @@ button.button:disabled {
 .chord-card[data-quality="minor"] { border-color: var(--quality-minor); background: var(--quality-minor-bg); }
 .chord-card[data-quality="diminished"] { border-color: var(--quality-dim); border-style: dashed; background: var(--quality-dim-bg); }
 
+/* Colored by function: the family replaces the quality treatment; dashed marks a weak dominant. */
+.chord-card[data-function] { border-style: solid; }
+.chord-card[data-function="tonic"] { border-color: var(--function-tonic); background: var(--function-tonic-bg); }
+.chord-card[data-function="subdominant"] { border-color: var(--function-subdominant); background: var(--function-subdominant-bg); }
+.chord-card[data-function="dominant"] { border-color: var(--function-dominant); background: var(--function-dominant-bg); }
+.chord-card[data-strength="weak"] { border-style: dashed; }
+
 .chord-card.is-active {
   transform: translateY(-2px);
   box-shadow: 0 0 0 3px var(--color-accent);
@@ -716,6 +723,11 @@ button.button:disabled {
 .loop-slot[data-quality="major"] { border-style: solid; border-color: var(--quality-major); background: var(--quality-major-bg); }
 .loop-slot[data-quality="minor"] { border-style: solid; border-color: var(--quality-minor); background: var(--quality-minor-bg); }
 .loop-slot[data-quality="diminished"] { border-color: var(--quality-dim); background: var(--quality-dim-bg); }
+
+.loop-slot[data-function="tonic"] { border-style: solid; border-color: var(--function-tonic); background: var(--function-tonic-bg); }
+.loop-slot[data-function="subdominant"] { border-style: solid; border-color: var(--function-subdominant); background: var(--function-subdominant-bg); }
+.loop-slot[data-function="dominant"] { border-style: solid; border-color: var(--function-dominant); background: var(--function-dominant-bg); }
+.loop-slot[data-strength="weak"] { border-style: dashed; }
 
 .loop-slot.is-active {
   box-shadow: 0 0 0 3px var(--color-accent);
