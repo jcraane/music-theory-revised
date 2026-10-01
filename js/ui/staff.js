@@ -1,6 +1,7 @@
 // A treble staff showing chords as whole notes, one per bar, with a label under each bar
 // (e.g. Roman numerals). Notes are { midi, name }, so the spelling decides the line or space
-// and the accidental. Rendered as SVG with glyphs from Bravura (see staff-glyphs.js).
+// and the accidental. Noteheads are colored root, third and fifth from the bottom up, unless
+// a note has its own `role` ("root", "third", "fifth" or "plain"). Rendered as SVG with glyphs from Bravura (see staff-glyphs.js).
 
 import { LETTERS, parseNote } from '../theory/notes.js';
 import { GLYPHS } from './staff-glyphs.js';
@@ -151,7 +152,7 @@ export function createStaff(container, { onSelect } = {}) {
 // shared by every system so the lines stay aligned.
 function measure(chords, keyLabel) {
   const bars = chords.map((chord) => {
-    const notes = chord.notes.map((note) => ({ step: staffStep(note), accidental: parseNote(note.name).offset }));
+    const notes = chord.notes.map((note, j) => ({ step: staffStep(note), accidental: parseNote(note.name).offset, role: note.role ?? ROLES[j] ?? 'root' }));
     const columns = accidentalColumns(notes);
     const used = Math.max(-1, ...columns.filter((c) => c !== null));
     // Each bar is as wide as its accidentals need, so they never reach into the previous bar.
@@ -200,7 +201,7 @@ function drawSystem({ bars: allBars, keyLabel, top, bottom }, indices, { first, 
     // Center the note and its accidentals together in the bar.
     const noteX = barX + (bar.width - bar.accidentalWidth - NOTE_WIDTH) / 2 + bar.accidentalWidth;
 
-    bar.notes.forEach(({ step, accidental }, j) => {
+    bar.notes.forEach(({ step, accidental, role }, j) => {
       for (const ledger of ledgerSteps(step)) {
         svg.append(el('line', { class: 'staff__line', x1: noteX - 3, x2: noteX + NOTE_WIDTH + 3, y1: y(ledger), y2: y(ledger) }));
       }
@@ -210,7 +211,7 @@ function drawSystem({ bars: allBars, keyLabel, top, bottom }, indices, { first, 
         const right = noteX - ACCIDENTAL_GAP - column * ACCIDENTAL_COLUMN;
         svg.append(glyph(ACCIDENTAL_GLYPH[accidental], right - glyphWidth, y(step), 'staff__accidental'));
       }
-      svg.append(glyph('noteheadWhole', noteX, y(step), `staff__note staff__note--${ROLES[j] ?? 'root'}`));
+      svg.append(glyph('noteheadWhole', noteX, y(step), `staff__note staff__note--${role}`));
     });
 
     svg.append(text(bar.label, noteX + NOTE_WIDTH / 2, labelY, 'staff__label'));

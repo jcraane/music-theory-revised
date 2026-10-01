@@ -231,6 +231,21 @@ Decided while specifying:
   degree-based value would put ii° (B D F in A minor, the same tritone as vii° in major)
   well below vii°.
 
+Decided while building sections 1–4:
+- Section 1 colors its cards by quality, with degree names: functions are only named at
+  the end of its read text and shown from section 2 on.
+- Listen in sections 1 and 4 leaves two beats of rest between progressions. Section 2's
+  Listen plays at 80 BPM with a beat of rest between families.
+- Section 2: when a stand-in sounds, a bracket under the piano spans its two shared notes
+  ("shared with I"); in a root-position triad they are always next to each other.
+- Section 3 uses a three-octave piano like the other sections, so every key fits. At rest
+  it shows the four notes of the resolution as scale notes with the two brackets; the
+  staff noteheads are plain, not role-colored. V without its leading tone is colored as
+  root and fifth.
+- Section 4: a loop with no backwards move reads "the usual flow", also when it has no
+  dominant (T S T T). The loop counts its move back to the first chord.
+- Until M10 the lesson has sections 1–4 only.
+
 ## Out of scope
 - Cadence types and their names (lesson 03).
 - Root motion and the circle of fifths (lesson 04).

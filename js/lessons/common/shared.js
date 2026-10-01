@@ -17,10 +17,12 @@ export function voice(names, octave = 4) {
  */
 export function voiceKeyChords(tonic, mode, chords) {
   const roots = voice(spellScale(tonic, mode), keyOctave(tonic));
-  return chords.map((chord, i) => {
-    const rootMidi = roots[i].midi;
-    return chord.notes.map((name, j) => ({ name, midi: j === 0 ? rootMidi : rootMidi + semitonesBetween(chord.notes[0], name) }));
-  });
+  return chords.map((chord, i) => voiceOn(chord.notes, roots[i].midi));
+}
+
+/** A root-position chord with its root on `rootMidi` and the other notes rising above it. */
+export function voiceOn(names, rootMidi) {
+  return names.map((name, j) => ({ name, midi: j === 0 ? rootMidi : rootMidi + semitonesBetween(names[0], name) }));
 }
 
 /** Octave for a key's tonic: 4 up to F#, 3 from G, so chords stay between C3 and B5. */

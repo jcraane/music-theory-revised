@@ -1,11 +1,12 @@
 // A four-chord loop built by picking chords. The section owns the sound: `play(degrees)`
-// must return a player handle for the looping sequence.
+// must return a player handle for the looping sequence. `onChange(degrees)` runs whenever
+// a chord is added or the loop is cleared.
 
 import { h } from './dom.js';
 import { prettyName } from './format.js';
 import { createPlayButton } from './play-button.js';
 
-export function createLoopBuilder({ length = 4, play }) {
+export function createLoopBuilder({ length = 4, play, onChange }) {
   let degrees = [];
   let chords = [];
 
@@ -18,6 +19,7 @@ export function createLoopBuilder({ length = 4, play }) {
       playButton.handle?.stop();
       degrees = [];
       render();
+      onChange?.([]);
     },
   }, 'Clear');
 
@@ -51,6 +53,7 @@ export function createLoopBuilder({ length = 4, play }) {
       if (degrees.length === length) degrees = [];
       degrees.push(degree);
       render();
+      onChange?.([...degrees]);
       if (degrees.length < length) return false;
       playButton.start();
       return true;
