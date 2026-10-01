@@ -1,6 +1,6 @@
 # 02: Harmonic function: home, away, tension
 
-**Status:** specified
+**Status:** built
 **Builds on:** 01
 **Estimated sections:** 8
 
@@ -244,7 +244,21 @@ Decided while building sections 1–4:
   root and fifth.
 - Section 4: a loop with no backwards move reads "the usual flow", also when it has no
   dominant (T S T T). The loop counts its move back to the first chord.
-- Until M10 the lesson has sections 1–4 only.
+
+Decided while building sections 5–8:
+- Section 5 shows only the curve and the piano, no cards. The curve shows the chosen
+  progression; while Listen plays it shows I–vi–IV–V, then the chosen one again.
+- Section 6 voices V and v just below their tonics, as section 3 does. The brackets run
+  from the leading tone to the major tonic (above the keys) and from the subtonic to the
+  minor tonic (below). The cards are the minor key's; V–I in the major key lights none.
+- Section 7 draws the path as a strip under the flow diagram: the chords in order in
+  function colors, with arrows between them and the backwards move marked "against the
+  flow". Listen leaves two beats of rest between the progressions.
+- Quiz: the ear questions' button reads "Play the progression". Sounds are stored as
+  { tonic, degrees } and voiced like the lesson. A stand-in question's wrong options are
+  three random chords from the other two families. After answering, a function question
+  plays the chord, a stand-in question the main chord and then the stand-in, and the
+  leading tone and dominant questions play V–I.
 
 ## Out of scope
 - Cadence types and their names (lesson 03).

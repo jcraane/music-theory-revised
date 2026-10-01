@@ -59,7 +59,8 @@ music-theory-revised/
       loop-builder.js four-chord loop slots with play and clear
       staff.js        treble staff with chords as whole notes (SVG)
       staff-glyphs.js clef, notehead and accidental outlines from Bravura (OFL)
-      flow-diagram.js tonic → subdominant → dominant diagram (lesson 02)
+      flow-diagram.js tonic → subdominant → dominant diagram and a progression's path
+      tension-curve.js bars per chord, as high as its tension (lesson 02)
       role-legend.js  legend for the piano highlight colors
       format.js       display names with ♯ and ♭, chord function labels
     lessons/
@@ -74,6 +75,7 @@ music-theory-revised/
         <section>.js  one file per section
       02-harmonic-function/
         index.js      lesson definition and section order
+        quiz-questions.js  quiz generator (pure, unit-tested)
         <section>.js  one file per section
   dev/
     audio.html        sandbox for trying the audio engine, not linked from the app
@@ -85,6 +87,7 @@ music-theory-revised/
     format.test.js
     staff.test.js
     quiz-questions.test.js
+    quiz-questions-02.test.js
     router.test.js
     shortcuts.test.js
     storage.test.js

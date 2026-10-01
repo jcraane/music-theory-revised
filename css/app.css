@@ -1148,6 +1148,135 @@ button.button:disabled {
 
 .staff__note--plain { fill: var(--color-text); }
 
+/* Tension curve: bars grow up from a shared baseline. */
+.tension {
+  display: grid;
+  grid-auto-columns: minmax(0, 5rem);
+  grid-auto-flow: column;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.tension__column {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  text-align: center;
+}
+
+.tension__value {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* The value sits right on top of its bar; the track leaves room for it above the tallest. */
+.tension__track {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  width: 100%;
+  height: 9.5rem;
+  padding-top: 1.5rem;
+  border-bottom: 2px solid var(--color-text-muted);
+}
+
+/* A home chord (0) still gets a sliver, so its column doesn't look empty. */
+.tension__bar {
+  flex: none;
+  width: 100%;
+  min-height: 0.25rem;
+  border: 2px solid var(--color-border);
+  border-bottom: 0;
+  border-radius: var(--radius) var(--radius) 0 0;
+  transition: transform 120ms, box-shadow 120ms;
+}
+
+.tension__bar[data-function="tonic"] { border-color: var(--function-tonic); background: var(--function-tonic-bg); }
+.tension__bar[data-function="subdominant"] { border-color: var(--function-subdominant); background: var(--function-subdominant-bg); }
+.tension__bar[data-function="dominant"] { border-color: var(--function-dominant); background: var(--function-dominant-bg); }
+
+.tension__column.is-active .tension__bar {
+  box-shadow: 0 0 0 3px var(--color-accent);
+}
+
+.tension__numeral {
+  font-weight: 700;
+}
+
+.tension__note {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+/* A progression's path: chords in function colors with arrows between them. */
+.flow-path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow-path__chord {
+  display: grid;
+  justify-items: center;
+  min-width: 4.5rem;
+  padding: var(--space-2);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: transform 120ms, box-shadow 120ms;
+}
+
+.flow-path__chord[data-function="tonic"] { border-color: var(--function-tonic); background: var(--function-tonic-bg); }
+.flow-path__chord[data-function="subdominant"] { border-color: var(--function-subdominant); background: var(--function-subdominant-bg); }
+.flow-path__chord[data-function="dominant"] { border-color: var(--function-dominant); background: var(--function-dominant-bg); }
+
+.flow-path__chord.is-active {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 3px var(--color-accent);
+}
+
+.flow-path__numeral {
+  font-weight: 700;
+}
+
+.flow-path__family {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.flow-path__move {
+  display: grid;
+  justify-items: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  line-height: 1;
+}
+
+.flow-path__move--backwards {
+  color: var(--function-dominant);
+  font-weight: 700;
+}
+
+.flow-path__move-label {
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

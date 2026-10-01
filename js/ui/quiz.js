@@ -1,7 +1,8 @@
 // Multiple-choice quiz, one question at a time, with feedback and a play button after
 // each answer. Questions come from `createQuestions()` ({ kind, prompt, options, answer,
-// explanation, sound }); `playSound(sound)` returns a player handle; `onFinish(score, total)`
-// returns { best, isNewBest } for the result screen.
+// explanation, sound }, optionally with `listenLabel` for an ear question's play button and
+// `answerSound` to play after answering instead of `sound`); `playSound(sound)` returns a
+// player handle; `onFinish(score, total)` returns { best, isNewBest } for the result screen.
 
 import { h } from './dom.js';
 import { createPlayButton } from './play-button.js';
@@ -56,7 +57,7 @@ export function renderQuiz(container, { createQuestions, playSound, onFinish }) 
           right ? 'Correct.' : `Not quite. The answer is ${question.options[question.answer]}.`),
         h('p', {}, question.explanation),
         h('div', { class: 'button-row' },
-          createPlayButton({ label: 'Hear it', primary: false, play: () => playSound(question.sound) }).element,
+          createPlayButton({ label: 'Hear it', primary: false, play: () => playSound(question.answerSound ?? question.sound) }).element,
           next),
       );
       next.focus();
@@ -66,7 +67,7 @@ export function renderQuiz(container, { createQuestions, playSound, onFinish }) 
       h('p', { class: 'quiz__progress' }, `Question ${index + 1} of ${questions.length}`),
       heading,
       question.kind === 'ear'
-        ? h('div', { class: 'button-row' }, createPlayButton({ label: 'Play the chord', shortcut: true, play: () => playSound(question.sound) }).element)
+        ? h('div', { class: 'button-row' }, createPlayButton({ label: question.listenLabel ?? 'Play the chord', shortcut: true, play: () => playSound(question.sound) }).element)
         : null,
       h('div', { class: 'quiz__options', role: 'group', 'aria-label': 'Answers' }, buttons),
       feedback,

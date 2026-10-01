@@ -5,6 +5,7 @@
 // with degree names) or "function" (tonic, subdominant, dominant, with the function named).
 //
 // Other options:
+// - cards: false leaves the cards out, for a section that only needs the piano.
 // - groupBy: "function" shows the cards in three labeled families instead of one row.
 // - extra(chord): an extra line for a card, or null.
 // - onSelect(chord): replaces what clicking a card or bar does (play it, or add it to the loop).
@@ -33,6 +34,7 @@ export function createChordBoard(ctx, see, {
   legend = ['root', 'third', 'fifth'],
   loop: withLoop = false,
   staff: withStaff = false,
+  cards: withCards = true,
   colorBy = 'quality',
   groupBy = null,
   extra = () => null,
@@ -48,7 +50,7 @@ export function createChordBoard(ctx, see, {
   let cards = [];
 
   const cardsElement = h('div', { class: groupBy ? 'chord-families' : 'chord-row' });
-  see.append(cardsElement);
+  if (withCards) see.append(cardsElement);
   const staff = withStaff ? createStaff(see, { onSelect: (i) => selectCard(chords[i]) }) : null;
   const piano = ctx.createPiano(see, { from: 48, octaves: 3 });
   see.append(roleLegend(legend));
