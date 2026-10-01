@@ -38,7 +38,8 @@ music-theory-revised/
       notes.js        pitch classes, spelling, MIDI conversion
       scales.js       major and natural minor scales, degree names, leading tone
       chords.js       triads, qualities, diatonic chords, Roman numerals, common tones
-      harmony.js      chord function, tension and a progression's flow (lesson 02)
+      harmony.js      chord function, tension and a progression's flow (lesson 02),
+                      cadence types (lesson 03)
     audio/
       engine.js       AudioContext, master chain (compressor, reverb), unlock on gesture
       instruments.js  "keys" (soft electric-piano-like) and "pad"
@@ -61,6 +62,7 @@ music-theory-revised/
       staff-glyphs.js clef, notehead and accidental outlines from Bravura (OFL)
       flow-diagram.js tonic → subdominant → dominant diagram and a progression's path
       tension-curve.js bars per chord, as high as its tension (lesson 02)
+      phrase-strip.js bars of a phrase with a cadence bracket and punctuation (lesson 03)
       role-legend.js  legend for the piano highlight colors
       format.js       display names with ♯ and ♭, chord function labels
     lessons/
@@ -69,12 +71,19 @@ music-theory-revised/
         shared.js     voicing, playback and piano highlight helpers
         chord-board.js  chord cards, staff, scale, piano and optional loop builder for a
                       key, colored by quality or by function
+        phrase.js     phrase steps: chords plus a top line, voiced and spelled per key
+        phrase-player.js  plays a phrase on a phrase strip and the piano (lesson 03)
       01-keys-and-chords/
         index.js      lesson definition and section order
         quiz-questions.js  quiz generator (pure, unit-tested)
         <section>.js  one file per section
       02-harmonic-function/
         index.js      lesson definition and section order
+        quiz-questions.js  quiz generator (pure, unit-tested)
+        <section>.js  one file per section
+      03-cadences/
+        index.js      lesson definition and section order
+        phrases.js    the openings, endings and extension as data
         quiz-questions.js  quiz generator (pure, unit-tested)
         <section>.js  one file per section
   dev/
@@ -88,6 +97,8 @@ music-theory-revised/
     staff.test.js
     quiz-questions.test.js
     quiz-questions-02.test.js
+    quiz-questions-03.test.js
+    phrase.test.js
     router.test.js
     shortcuts.test.js
     storage.test.js
@@ -128,6 +139,10 @@ Added for lesson 02 (see docs/lessons/02-harmonic-function.md):
 - `flowPath(degrees, mode, { loop })` → { functions, backwards: [{ from, to }] }, where a
   backwards move goes from a dominant to a subdominant
 
+Added for lesson 03 (see docs/lessons/03-cadences.md):
+- `cadenceType(from, to, mode)` → "authentic" | "plagal" | "half" | "deceptive" |
+  "aeolian" | null, from two scale degrees; aeolian (VII–i) only in minor
+
 Decisions:
 - Chord names: "C", "Cm", "Cdim", "Caug". Roman numerals still use ° and +.
 - `intervalName(6)` is "tritone"; semitones alone can't tell an augmented 4th from a diminished 5th.
@@ -153,7 +168,8 @@ Tests must cover at least:
 
 ### Piano component (js/ui/piano.js)
 - Renders two octaves (configurable), responsive, SVG or DOM.
-- `highlight(notes, role)` with roles: root, third, fifth, scale, outside-key, skipped
+- `highlight(notes, role)` with roles: root, third, fifth, scale, outside-key, skipped,
+  melody (lesson 03)
   (skipped is for lesson 01 section 2). Notes are MIDI numbers or `{ midi, name }`, so
   voicings land on the right keys and labels use the key's spelling.
 - `annotate(fromMidi, toMidi, text)` draws a labeled bracket above or below the keys
@@ -190,7 +206,8 @@ Lesson content is specified separately from this plan:
   interactions, experiments and quiz.
 
 The MVP implements `docs/lessons/01-keys-and-chords.md`.
-After the MVP, `docs/lessons/02-harmonic-function.md` follows (milestones M8–M10).
+After the MVP, `docs/lessons/02-harmonic-function.md` follows (milestones M8–M10), then
+`docs/lessons/03-cadences.md` (milestones M11–M13).
 
 ## Milestones
 - **M0 Setup:** folder structure, index.html, mise.toml, package.json, README with local serve
@@ -214,11 +231,20 @@ After the MVP, `docs/lessons/02-harmonic-function.md` follows (milestones M8–M
 - **M10 Lesson 2** sections 5–8: the tension curve, the minor preview, the experiment and
   the quiz.
 
+- **M11 Lesson 3 groundwork:** `cadenceType` with unit tests (tests first). Per-note
+  length and velocity in sequence steps, with the pure step-to-notes helper tested.
+  `phraseSteps` with the phrase voicing, tested in every selectable key. The piano's
+  melody role with tokens for light and dark, the phrase strip and the phrase player.
+- **M12 Lesson 3** sections 1–4, as specified in docs/lessons/03-cadences.md: question
+  and answer, authentic, plagal and half cadences.
+- **M13 Lesson 3** sections 5–8: the deceptive cadence with its extension, cadences in
+  minor, the four-endings experiment and the quiz.
+
 Each milestone ends with a working app and a short manual test checklist.
 
 ## Out of scope for the MVP
-- All lessons after 02 and the genre lenses (see docs/curriculum.md). Lesson 02 comes
-  right after the MVP (M8–M10).
+- All lessons after 03 and the genre lenses (see docs/curriculum.md). Lessons 02 and 03
+  come right after the MVP (M8–M13).
 - Progression builder with MIDI export.
 - Web MIDI input from a keyboard.
 - Ear training game modes beyond the lesson quizzes.
